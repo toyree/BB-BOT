@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $access_token = 'LvT9xy2S/PpEYV13/nYmuiKPmCN32IgDIedHiPx/Yblb/o56FfA1O/jm5nQPkWfLlbGe0+qqULp/RcnNz6lYX6VVX22NejRzzxfPINneai29WceiQFJ04BMUhSLeJoJd/ffZW+lFzjwFudtrgD1FBQdB04t89/1O/w1cDnyilFU=';
 
 // Get POST body content
@@ -12,7 +12,12 @@ if (!is_null($events['events'])) {
 		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 			// Get text sent
-			$text = $event['message']['text'];
+			if($event['message']['text'] == "Hi" || $event['message']['text'] == "Hello"){
+				$text = "ว่าไงสัส";
+			}ELSE{
+				$text = $event['message']['text'];
+			}
+			
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
