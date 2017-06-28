@@ -12,9 +12,13 @@ if (!is_null($events['events'])) {
 		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 			// Get text sent
-			$text = $event['message']['text'];
-			if($text == 'Hi' || $text == 'Hello'){
+			$texts = $event['message']['text'];
+			if($texts == 'Hi' || $texts == 'Hello'){
 				$text = "ว่าไงสัส";
+			}elseif($texts == 'video'){
+				$text = 'บริการ ส่ง Video สุดฮา ถึงมือท่านในทันที';
+				$text_video = 'https://www.youtube.com/watch?v=ykPKcRfwrnY';
+				$text_preview = 'https://i.ytimg.com/vi/ykPKcRfwrnY/hqdefault.jpg';
 			}else{
 				$text = $event['message']['text'];
 			}
@@ -23,11 +27,23 @@ if (!is_null($events['events'])) {
 			$replyToken = $event['replyToken'];
 
 			// Build message to reply back
+		if($texts == 'video'){
 			$messages = [
 				'type' => 'text',
 				'text' => $text
 			];
 
+			$messages = [
+				'type' => 'text',
+				'originalContentUrl' => $text_video,
+				'previewImageUrl' => $text_preview
+			];
+		}else{
+			$messages = [
+				'type' => 'text',
+				'text' => $text
+			];
+		}
 			// Make a POST Request to Messaging API to reply to sender
 			$url = 'https://api.line.me/v2/bot/message/reply';
 			$data = [
