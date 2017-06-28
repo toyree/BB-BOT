@@ -34,7 +34,7 @@ if (!is_null($events['events'])) {
 			];
 
 			$messages = [
-				'type' => 'text',
+				'type' => 'video',
 				'originalContentUrl' => $text_video,
 				'previewImageUrl' => $text_preview
 			];
