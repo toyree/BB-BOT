@@ -17,8 +17,8 @@ if (!is_null($events['events'])) {
 				$text = "ว่าไงสัส";
 			}elseif($texts == 'video'){
 				$text = 'บริการ ส่ง Video สุดฮา ถึงมือท่านในทันที';
-				$text_video = 'https://www.youtube.com/watch?v=ykPKcRfwrnY';
-				$text_preview = 'https://i.ytimg.com/vi/ykPKcRfwrnY/hqdefault.jpg';
+				$text_video = 'https://immense-journey-74194.herokuapp.com/test01.mp4';
+				$text_preview = 'https://immense-journey-74194.herokuapp.com/test01.jpg';
 			}else{
 				$text = $event['message']['text'];
 			}
