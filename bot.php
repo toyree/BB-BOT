@@ -12,10 +12,12 @@ if (!is_null($events['events'])) {
 		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 			// Get text sent
-			$texts = $event['message']['text'];
-			if($texts == 'Hi' || $texts == 'Hello'){
+			$texts = strtoupper($event['message']['text']);
+			if($texts == 'HI' || $texts == 'HELLO' || $texts == 'สวัสดี'){
 				$text = "ว่าไงสัส";
-			}elseif($texts == 'video'){
+			}elseif($texts == 'อายุเท่าไหร่' || $texts == 'กี่ขวบ'){
+
+			}elseif($texts == 'VIDEO' || $texts == 'VDO'){
 				$text = 'บริการ ส่ง Video สุดฮา ถึงมือท่านในทันที';
 				$text_video = 'https://immense-journey-74194.herokuapp.com/test01.mp4';
 				$text_preview = 'https://immense-journey-74194.herokuapp.com/test01.jpg';
@@ -27,7 +29,7 @@ if (!is_null($events['events'])) {
 			$replyToken = $event['replyToken'];
 
 			// Build message to reply back
-		if($texts == 'video'){
+		if($texts == 'VIDEO' || $texts == 'VDO'){
 			$messages = [
 				'type' => 'text',
 				'text' => $text
