@@ -78,10 +78,11 @@ if(!is_null($events)){
             }
             break;
         default:
-            $textReplyMessage = json_encode($events);
-            //$textReplyMessage = $typeMessage;
+            //$textReplyMessage = json_encode($events);
+            $textReplyMessage = $typeMessage;
             break;  
     }
+}
 // ส่วนของคำสั่งจัดเตียมรูปแบบข้อความสำหรับส่ง
 $textMessageBuilder = new TextMessageBuilder(json_encode($events));
  
