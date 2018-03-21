@@ -62,86 +62,26 @@ if(!is_null($events)){
     $replyToken = $events['events'][0]['replyToken'];
     $typeMessage = $events['events'][0]['message']['type'];
     $userMessage = $events['events'][0]['message']['text'];
-    $userMessage = strtolower($userMessage);
+    //$userMessage = strtolower($userMessage);
     switch ($typeMessage){
         case 'text':
             switch ($userMessage) {
-                case "t":
-                    $textReplyMessage = "Bot ตอบกลับคุณเป็นข้อความ";
-                    $replyData = new TextMessageBuilder($textReplyMessage);
+                case "A":
+                    $textReplyMessage = "คุณพิมพ์ A";
                     break;
-                case "i":
-                    $picFullSize = 'https://www.mywebsite.com/imgsrc/photos/f/simpleflower';
-                    $picThumbnail = 'https://www.mywebsite.com/imgsrc/photos/f/simpleflower/240';
-                    $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
+                case "B":
+                    $textReplyMessage = "คุณพิมพ์ B";
                     break;
-                case "v":
-                    $picThumbnail = 'https://www.mywebsite.com/imgsrc/photos/f/sampleimage/240';
-                    $videoUrl = "https://www.mywebsite.com/simplevideo.mp4";                
-                    $replyData = new VideoMessageBuilder($videoUrl,$picThumbnail);
-                    break;
-                case "a":
-                    $audioUrl = "https://www.mywebsite.com/simpleaudio.mp3";
-                    $replyData = new AudioMessageBuilder($audioUrl,27000);
-                    break;
-                case "l":
-                    $placeName = "ที่ตั้งร้าน";
-                    $placeAddress = "แขวง พลับพลา เขต วังทองหลาง กรุงเทพมหานคร ประเทศไทย";
-                    $latitude = 13.780401863217657;
-                    $longitude = 100.61141967773438;
-                    $replyData = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);              
-                    break;
-                case "s":
-                    $stickerID = 22;
-                    $packageID = 2;
-                    $replyData = new StickerMessageBuilder($packageID,$stickerID);
-                    break;      
-                case "im":
-                    $imageMapUrl = 'https://www.mywebsite.com/imgsrc/photos/w/sampleimagemap';
-                    $replyData = new ImagemapMessageBuilder(
-                        $imageMapUrl,
-                        'This is Title',
-                        new BaseSizeBuilder(699,1040),
-                        array(
-                            new ImagemapMessageActionBuilder(
-                                'test image map',
-                                new AreaBuilder(0,0,520,699)
-                                ),
-                            new ImagemapUriActionBuilder(
-                                'http://www.ninenik.com',
-                                new AreaBuilder(520,0,520,699)
-                                )
-                        )); 
-                    break;          
-                case "tm":
-                    $replyData = new TemplateMessageBuilder('Confirm Template',
-                        new ConfirmTemplateBuilder(
-                                'Confirm template builder',
-                                array(
-                                    new MessageTemplateActionBuilder(
-                                        'Yes',
-                                        'Text Yes'
-                                    ),
-                                    new MessageTemplateActionBuilder(
-                                        'No',
-                                        'Text NO'
-                                    )
-                                )
-                        )
-                    );
-                    break;                                                                                                                          
                 default:
-                    $textReplyMessage = " คุณไม่ได้พิมพ์ ค่า ตามที่กำหนด";
-                    $replyData = new TextMessageBuilder($textReplyMessage);         
+                    $textReplyMessage = " คุณไม่ได้พิมพ์ A และ B";
                     break;                                      
             }
             break;
         default:
-            $textReplyMessage = json_encode($events);
-            $replyData = new TextMessageBuilder($textReplyMessage);         
+            //$textReplyMessage = json_encode($events);
+            $textReplyMessage = $typeMessage;
             break;  
     }
-}
 // ส่วนของคำสั่งจัดเตียมรูปแบบข้อความสำหรับส่ง
 $textMessageBuilder = new TextMessageBuilder(json_encode($events));
  
