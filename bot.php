@@ -154,5 +154,4 @@ if ($response->isSucceeded()) {
  
 // Failed
 echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
->>>>>>> 44391e01400e68ac229afa0bbf5fa13a2937eda1
 ?>
