@@ -67,17 +67,17 @@ if(!is_null($events)){
         case 'text':
             switch ($userMessage) {
                 case "t":
-                    $textReplyMessage = "Bot ตอบกลับคุณเป็นข้อความ";
+                    $textReplyMessage = "TR Autobot";
                     $replyData = new TextMessageBuilder($textReplyMessage);
                     break;
                 case "i":
-                    $picFullSize = 'https://www.mywebsite.com/imgsrc/photos/f/simpleflower';
-                    $picThumbnail = 'https://www.mywebsite.com/imgsrc/photos/f/simpleflower/240';
+                    $picFullSize = 'http://easyuppic.com/images/2018/03/22/ForestRiverCrossingMountainFogiPhone6HDWallpaper.jpg';
+                    $picThumbnail = 'http://easyuppic.com/images/2018/03/22/ForestRiverCrossingMountainFogiPhone6HDWallpaper.th.jpg';
                     $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
                     break;
                 case "v":
-                    $picThumbnail = 'https://www.mywebsite.com/imgsrc/photos/f/sampleimage/240';
-                    $videoUrl = "https://www.mywebsite.com/simplevideo.mp4";                
+                    $picThumbnail = 'https://immense-journey-74194.herokuapp.com/test01.jpg';
+                    $videoUrl = "https://immense-journey-74194.herokuapp.com/test01.mp4";                
                     $replyData = new VideoMessageBuilder($videoUrl,$picThumbnail);
                     break;
                 case "a":
