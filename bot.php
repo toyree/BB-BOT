@@ -71,8 +71,8 @@ if(!is_null($events)){
                     $replyData = new TextMessageBuilder($textReplyMessage);
                     break;
                 case "i":
-                    $picFullSize = 'http://easyuppic.com/images/2018/03/22/ForestRiverCrossingMountainFogiPhone6HDWallpaper.jpg';
-                    $picThumbnail = 'http://easyuppic.com/images/2018/03/22/ForestRiverCrossingMountainFogiPhone6HDWallpaper.th.jpg';
+                    $picFullSize = 'https://immense-journey-74194.herokuapp.com/pic1.jpg';
+                    $picThumbnail = 'https://immense-journey-74194.herokuapp.com/pict1.jpg';
                     $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
                     break;
                 case "v":
