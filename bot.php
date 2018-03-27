@@ -63,9 +63,10 @@ if(!is_null($events)){
     $typeMessage = $events['events'][0]['message']['type'];
     $userMessage = $events['events'][0]['message']['text'];
     $userMessage = strtolower($userMessage);
+    list($first, $mid, $last) = explode('-', $userMessage);
     switch ($typeMessage){
         case 'text':
-            switch ($userMessage) {
+            switch ($first) {
                 case "t":
                     $textReplyMessage = "TR Autobot";
                     $replyData = new TextMessageBuilder($textReplyMessage);
@@ -90,6 +91,30 @@ if(!is_null($events)){
                     $latitude = 13.780401863217657;
                     $longitude = 100.61141967773438;
                     $replyData = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);              
+                    break;
+                case "tel":
+                    switch ($mid) {
+                     case "tong":
+                       $textReplyMessage = "เบอร์ติดต่อ พชร : 089-xxx-tong";
+                       $replyData = new TextMessageBuilder($textReplyMessage);
+                       break;
+                     case "toy":
+                         $textReplyMessage = "เบอร์ติดต่อ ทอย: 089-xxx-toy";
+                         $replyData = new TextMessageBuilder($textReplyMessage);
+                         break;
+                      case "test":
+                         $textReplyMessage = "เบอร์ติดต่อ ทดสอย : 089-xxx-test";
+                         $replyData = new TextMessageBuilder($textReplyMessage);
+                         break;
+                      case "":
+                         $textReplyMessage = "กรุณาพิมพ์ tel-<ชื่อ> เพื่อสอบถามข้อมูลเบอร์โปรศัพท์";
+                         $replyData = new TextMessageBuilder($textReplyMessage);
+                         break;
+                      default:
+                        $textReplyMessage = " ไม่มีพบข้อมูล ";
+                        $replyData = new TextMessageBuilder($textReplyMessage);
+                        break;    
+                    }
                     break;
                 case "s":
                     $stickerID = 22;
@@ -129,7 +154,7 @@ if(!is_null($events)){
                                 )
                         )
                     );
-                    break;                                                                                                                          
+                    break;
                 default:
                     $textReplyMessage = " คุณไม่ได้พิมพ์ ค่า ตามที่กำหนด";
                     $replyData = new TextMessageBuilder($textReplyMessage);         
