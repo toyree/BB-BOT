@@ -71,6 +71,10 @@ if(!is_null($events)){
                     $textReplyMessage = "TR Autobot";
                     $replyData = new TextMessageBuilder($textReplyMessage);
                     break;
+                case "help":
+                    $textReplyMessage = "คำสั่งเบื้องต้น <br/> I=>Image <br/> Tel=>ตรวจเบอร์ <br/> Move=>เช็คตำแหน่ง";
+                    $replyData = new TextMessageBuilder($textReplyMessage);
+                    break;
                 case "i":
                     $picFullSize = 'https://immense-journey-74194.herokuapp.com/pic1.jpg';
                     $picThumbnail = 'https://immense-journey-74194.herokuapp.com/pict1.jpg';
@@ -111,11 +115,35 @@ if(!is_null($events)){
                          $replyData = new TextMessageBuilder($textReplyMessage);
                          break;
                       default:
-                        $textReplyMessage = " ไม่มีพบข้อมูล ";
+                        $textReplyMessage = " ไม่พบข้อมูล ";
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;    
                     }
                     break;
+                case "move":
+                    switch ($mid) {
+                     case "tong":
+                       $textReplyMessage = "Tong ย้ายไปบ้านนอก 6 เดือน";
+                       $replyData = new TextMessageBuilder($textReplyMessage);
+                       break;
+                     case "toy":
+                       $textReplyMessage = "อยู่ในเมือง อันแสนโหดร้าย";
+                       $replyData = new TextMessageBuilder($textReplyMessage);
+                       break;
+                     case "test":
+                       $textReplyMessage = "ทดสอบ ทดสอบ และ ทดสอบ";
+                       $replyData = new TextMessageBuilder($textReplyMessage);
+                       break;
+                     case "":
+                       $textReplyMessage = "กรุณาพิมพ์ move-<ชื่อ> เพื่อสอบถามข้อมูลที่อยู่";
+                       $replyData = new TextMessageBuilder($textReplyMessage);
+                       break;
+                     default:
+                       $textReplyMessage = " ไม่พบข้อมูล ";
+                       $replyData = new TextMessageBuilder($textReplyMessage);
+                       break;    
+                    }
+                break;
                 case "s":
                     $stickerID = 22;
                     $packageID = 2;
@@ -156,7 +184,7 @@ if(!is_null($events)){
                     );
                     break;
                 default:
-                    $textReplyMessage = " คุณไม่ได้พิมพ์ ค่า ตามที่กำหนด";
+                    $textReplyMessage = "คำสั่งไม่ถูกต้อง กรุณาพิมพ์ HELP เพื่อตรวจสอบคำสั่ง";
                     $replyData = new TextMessageBuilder($textReplyMessage);         
                     break;                                      
             }
