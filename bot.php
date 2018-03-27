@@ -72,7 +72,7 @@ if(!is_null($events)){
                     $replyData = new TextMessageBuilder($textReplyMessage);
                     break;
                 case "help":
-                    $textReplyMessage = "คำสั่งเบื้องต้น <br/> I=>Image <br/> Tel=>ตรวจเบอร์ <br/> Move=>เช็คตำแหน่ง";
+                    $textReplyMessage = "คำสั่งเบื้องต้น     I=>Image     Tel=>ตรวจเบอร์     Move=>เช็คตำแหน่ง";
                     $replyData = new TextMessageBuilder($textReplyMessage);
                     break;
                 case "i":
