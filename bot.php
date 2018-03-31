@@ -11,7 +11,7 @@ require_once 'vendor/autoload.php';
 require_once 'bot_settings.php';
  
 // กรณีมีการเชื่อมต่อกับฐานข้อมูล
-//require_once("dbconnect.php");
+require_once("connect.php");
  
 ///////////// ส่วนของการเรียกใช้งาน class ผ่าน namespace
 use LINE\LINEBot;
@@ -97,6 +97,41 @@ if(!is_null($events)){
                     $replyData = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);              
                     break;
                 case "tel":
+                  IF ($mid <> ''){
+                    $telsql = "SELECT * FROM telephone where nickname = '.$mid.'";
+                    $telquery = mysql_query($telsql)or die("Can't Query ".mysql_error() . " Actual query: " . $telsql);
+                    $telchknum = mysql_num_rows($telquery);
+                    IF ($telchknum > 0){
+                      $telResult = mysql_fetch_array($telquery);
+                      $lv_tel_data = "F";
+                    }else{
+                     $telsql = "SELECT * FROM telephone where name = '.$mid.'";
+                     $telquery = mysql_query($telsql)or die("Can't Query ".mysql_error() . " Actual query: " . $telsql);
+                     $telchknum2 = mysql_num_rows($telquery);
+                     IF ($telchknum2 > 0){
+                      $telResult = mysql_fetch_array($telquery);
+                      $lv_tel_data = "F";
+                     }else{
+                      $lv_tel_data = "NF";
+                     }
+                    }
+                    
+                    switch ($lv_tel_data){
+                     case "F":
+                      $textReplyMessage = $telResult["name"]."(".$telResult["nickname"].") : ".$telResult["tel_no"];
+                      $replyData = new TextMessageBuilder($textReplyMessage);
+                      break;
+                     case "NF":
+                      $textReplyMessage = " ไม่พบข้อมูล ";
+                      $replyData = new TextMessageBuilder($textReplyMessage);
+                      break;
+                    }
+                  }else{
+                   $textReplyMessage = "กรุณาพิมพ์ tel-<ชื่อ> เพื่อสอบถามข้อมูลเบอร์โปรศัพท์";
+                   $replyData = new TextMessageBuilder($textReplyMessage);
+                   break;
+                  }
+                    /*
                     switch ($mid) {
                      case "tong":
                        $textReplyMessage = "เบอร์ติดต่อ พชร : 089-xxx-tong";
@@ -119,6 +154,7 @@ if(!is_null($events)){
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;    
                     }
+                    */
                     break;
                 case "move":
                     switch ($mid) {
