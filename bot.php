@@ -97,6 +97,7 @@ if(!is_null($events)){
                     $replyData = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);              
                     break;
                 case "tel":
+              /*
                   IF ($mid <> ''){
                     $telsql = "SELECT * FROM telephone where nickname = '.$mid.'";
                     $telquery = mysql_query($telsql)or die("Can't Query ".mysql_error() . " Actual query: " . $telsql);
@@ -131,7 +132,8 @@ if(!is_null($events)){
                    $replyData = new TextMessageBuilder($textReplyMessage);
                    break;
                   }
-                    /*
+                  */
+                    
                     switch ($mid) {
                      case "tong":
                        $textReplyMessage = "เบอร์ติดต่อ พชร : 089-xxx-tong";
@@ -154,7 +156,7 @@ if(!is_null($events)){
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;    
                     }
-                    */
+                    
                     break;
                 case "move":
                     switch ($mid) {
