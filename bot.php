@@ -240,8 +240,8 @@ if(!is_null($events)){
             }
             break;
         default:
-            $textReplyMessage = json_encode($events);
-            $replyData = new TextMessageBuilder($textReplyMessage);         
+            //$textReplyMessage = json_encode($events);
+            //$replyData = new TextMessageBuilder($textReplyMessage);         
             break;  
     }
 }
