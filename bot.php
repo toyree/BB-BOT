@@ -135,16 +135,24 @@ if(!is_null($events)){
                   */
                     
                     switch ($mid) {
-                     case "tong":
-                       $textReplyMessage = "เบอร์ติดต่อ พชร : 089-xxx-tong";
+                     case "arm":
+                       $textReplyMessage = "เบอร์ติดต่อ เหยิน : 080-646-6594 , 083-090-8433";
                        $replyData = new TextMessageBuilder($textReplyMessage);
                        break;
                      case "toy":
-                         $textReplyMessage = "เบอร์ติดต่อ ทอย: 089-xxx-toy";
+                         $textReplyMessage = "เบอร์ติดต่อ ทอย: 089-245-2436";
                          $replyData = new TextMessageBuilder($textReplyMessage);
                          break;
                       case "test":
-                         $textReplyMessage = "เบอร์ติดต่อ ทดสอย : 089-xxx-test";
+                         $textReplyMessage = "เบอร์ติดต่อ ทดสอบ : 089-xxx-test";
+                         $replyData = new TextMessageBuilder($textReplyMessage);
+                         break;
+                      case "pum":
+                         $textReplyMessage = "เบอร์ติดต่อ ปุ้ม : 097-220-2000";
+                         $replyData = new TextMessageBuilder($textReplyMessage);
+                         break;
+                      case "list":
+                         $textReplyMessage = "คุณสามารถพิมพ์รายชื่อ ได้ตามด้านล่าง Arm | Toy | Pum | Test";
                          $replyData = new TextMessageBuilder($textReplyMessage);
                          break;
                       case "":
@@ -160,12 +168,16 @@ if(!is_null($events)){
                     break;
                 case "move":
                     switch ($mid) {
-                     case "tong":
-                       $textReplyMessage = "Tong ย้ายไปบ้านนอก 6 เดือน";
+                     case "Arm":
+                       $textReplyMessage = "ปราจีน บุเรี่ยน";
                        $replyData = new TextMessageBuilder($textReplyMessage);
                        break;
                      case "toy":
                        $textReplyMessage = "อยู่ในเมือง อันแสนโหดร้าย";
+                       $replyData = new TextMessageBuilder($textReplyMessage);
+                       break;
+                      case "pum":
+                       $textReplyMessage = "กลัวเมีย";
                        $replyData = new TextMessageBuilder($textReplyMessage);
                        break;
                      case "test":
