@@ -221,10 +221,10 @@ if(!is_null($events)){
                         )
                     );
                     break;
-                default:
-                    $textReplyMessage = "คำสั่งไม่ถูกต้อง กรุณาพิมพ์ HELP เพื่อตรวจสอบคำสั่ง";
-                    $replyData = new TextMessageBuilder($textReplyMessage);         
-                    break;                                      
+                //default:
+                    //$textReplyMessage = "คำสั่งไม่ถูกต้อง กรุณาพิมพ์ HELP เพื่อตรวจสอบคำสั่ง";
+                    //$replyData = new TextMessageBuilder($textReplyMessage);         
+                    //break;                                      
             }
             break;
         default:
