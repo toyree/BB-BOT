@@ -168,7 +168,7 @@ if(!is_null($events)){
                     break;
                 case "move":
                     switch ($mid) {
-                     case "Arm":
+                     case "arm":
                        $textReplyMessage = "ปราจีน บุเรี่ยน";
                        $replyData = new TextMessageBuilder($textReplyMessage);
                        break;
