@@ -12,7 +12,15 @@ require_once 'bot_settings.php';
  
 // กรณีมีการเชื่อมต่อกับฐานข้อมูล
 //require_once("connect.php");
- 
+ $localhost = "119.59.120.5";
+$username = "exvaycom_linebot";
+$password = "!1q2w3e4r5t";
+$dbname = "exvaycom_line";
+
+$conn = mysql_connect($localhost,$username,$password)or die("Can't Connect to Server");
+//mysql_query("SET NAMES tis620");
+mysql_select_db($dbname);
+
 ///////////// ส่วนของการเรียกใช้งาน class ผ่าน namespace
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient;
