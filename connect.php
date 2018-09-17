@@ -1,4 +1,3 @@
-<?
 
 $localhost = "119.59.120.5";
 $username = "exvaycom_linebot";
@@ -21,5 +20,5 @@ if ($cmchknum > 0) {
 	echo "NOT Found!";
 }
 */
-?>
+
 
