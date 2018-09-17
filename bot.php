@@ -143,6 +143,10 @@ if(!is_null($events)){
                          $textReplyMessage = "เบอร์ติดต่อ ทอย: 089-245-2436";
                          $replyData = new TextMessageBuilder($textReplyMessage);
                          break;
+                      case "tong":
+                         $textReplyMessage = "เบอร์ติดต่อ ตง: 089-XXX-XXXX";
+                         $replyData = new TextMessageBuilder($textReplyMessage);
+                         break;
                       case "test":
                          $textReplyMessage = "เบอร์ติดต่อ ทดสอบ : 089-xxx-test";
                          $replyData = new TextMessageBuilder($textReplyMessage);
@@ -174,6 +178,10 @@ if(!is_null($events)){
                        break;
                      case "toy":
                        $textReplyMessage = "อยู่ในเมือง อันแสนโหดร้าย";
+                       $replyData = new TextMessageBuilder($textReplyMessage);
+                       break;
+                      case "tong":
+                       $textReplyMessage = "ติดเมียน้อย อยู่";
                        $replyData = new TextMessageBuilder($textReplyMessage);
                        break;
                       case "pum":
