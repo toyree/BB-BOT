@@ -11,7 +11,7 @@ require_once 'vendor/autoload.php';
 require_once 'bot_settings.php';
  
 // กรณีมีการเชื่อมต่อกับฐานข้อมูล
-require_once("connect.php");
+//require_once("connect.php");
  
 ///////////// ส่วนของการเรียกใช้งาน class ผ่าน namespace
 use LINE\LINEBot;
