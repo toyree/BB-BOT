@@ -11,7 +11,7 @@ require_once 'vendor/autoload.php';
 require_once 'bot_settings.php';
  
 // กรณีมีการเชื่อมต่อกับฐานข้อมูล
-//require_once("connect.php");
+require_once("connect.php");
  
 ///////////// ส่วนของการเรียกใช้งาน class ผ่าน namespace
 use LINE\LINEBot;
@@ -133,7 +133,16 @@ if(!is_null($events)){
                    break;
                   }
                   */
-                    
+              IF ($mid <> ''){
+               $textReplyMessage = "Toy1";
+               $replyData = new TextMessageBuilder($textReplyMessage);
+               break;
+              }ELSE{
+               $textReplyMessage = "Tong";
+               $replyData = new TextMessageBuilder($textReplyMessage);
+               break;
+              }
+                  /*
                     switch ($mid) {
                      case "arm":
                        $textReplyMessage = "เบอร์ติดต่อ เหยิน : 080-646-6594 , 083-090-8433";
@@ -168,7 +177,7 @@ if(!is_null($events)){
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;    
                     }
-                    
+                    */
                     break;
                 case "move":
                     switch ($mid) {
