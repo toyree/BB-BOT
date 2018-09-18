@@ -134,7 +134,11 @@ if(!is_null($events)){
 			  $up_m = strtoupper($mid);
 			  $up_l = strtoupper($last);
                           $rates = $result->{'rates'}->$up_l / $result->{'rates'}->$up_m;
-                          $textReplyMessage = "$up_l Rate". "Today \n 1 $up_m is : " . $rates ." ". $up_l;
+			  IF ($rates == '' || $rates == '0.00'){
+				$textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
+			  }else{
+                          	$textReplyMessage = "$up_l Rate". "Today \n 1 $up_m is : " . $rates ." ". $up_l;
+			  }
                         }
 			    
                         $replyData = new TextMessageBuilder($textReplyMessage);
