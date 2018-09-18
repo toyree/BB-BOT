@@ -111,7 +111,7 @@ if(!is_null($events)){
                           $rates = $result->{'rates'}->JPY / $result->{'rates'}->THB;
                           $textReplyMessage = "JPY Rate". "Today is : " . $rates;
                         }elseif ($last == 'nzd') {
-                          $rates = $result->{'rates'}->NZD / $result->{'rates'}->THB;
+                          $rates = $result->{'rates'}->THB / $result->{'rates'}->NZD;
                           $textReplyMessage = "NZD Rate". "Today is : " . $rates;
                         }
                         $replyData = new TextMessageBuilder($textReplyMessage);
