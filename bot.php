@@ -97,10 +97,7 @@ if(!is_null($events)){
                     $replyData = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);              
                     break;
                 case "tong":
-                	//require_once("tongcode.php");
-                	$textReplyMessage = "TR Autobot";
-                    $replyData = new TextMessageBuilder($textReplyMessage);
-                	break;
+                	require_once("tongcode.php");
                 case "tel":
               /*
                   IF ($mid <> ''){
