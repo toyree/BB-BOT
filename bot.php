@@ -101,8 +101,11 @@ if(!is_null($events)){
                         $textReplyMessage = 'Tong Test 1';
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;
-                        }else{
-                        $textReplyMessage = 'Tong Test 2';
+                        }elseif($mid == 'rates'){
+                        $url = 'https://openexchangerates.org/api/latest.json?app_id=f23f7281781e426a9464af98371f1ae4';
+	                	$data = file_get_contents($url);
+						$result = json_decode($data);
+                        $textReplyMessage = "USD Rate". "Today is : " . $result->{'rates'}->THB;
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;
                         }
