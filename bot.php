@@ -103,9 +103,13 @@ if(!is_null($events)){
                         break;
                         }elseif($mid == 'rates'){
                         $url = 'https://openexchangerates.org/api/latest.json?app_id=f23f7281781e426a9464af98371f1ae4';
-	                	$data = file_get_contents($url);
-						$result = json_decode($data);
-                        $textReplyMessage = "USD Rate". "Today is : " . $result->{'rates'}->THB;
+	                	    $data = file_get_contents($url);
+						            $result = json_decode($data);
+                        if ($last == 'usd') {
+                          $textReplyMessage = "USD Rate". "Today is : " . $result->{'rates'}->THB;
+                        }elseif ($last == 'jpy') {
+                          $textReplyMessage = "JPY Rate". "Today is : " . $result->{'rates'}->JPY;
+                        }
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;
                         }
