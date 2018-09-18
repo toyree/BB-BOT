@@ -120,7 +120,7 @@ if(!is_null($events)){
 		//Add Rate By Toy -- START --			    
 		case "rate":
                     IF($mid == '' || $mid == 'help' ){
-                        $textReplyMessage = 'การใช้คำสั่ง Rate ให้พิมพ์ตามรูปแบบนี้ rate-<currency คั้งต้น>-<currency ปลายทาง>';
+                        $textReplyMessage = 'การใช้คำสั่ง Rate ให้พิมพ์ตามรูปแบบนี้ \n rate-<currency คั้งต้น>-<currency ปลายทาง>';
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;
                         }elseif($mid <> '' && $mid <> 'help'){
@@ -129,12 +129,12 @@ if(!is_null($events)){
 						            $result = json_decode($data);
 			    
                         if ($mid == 'usd' && $last == 'thb') {
-                          $textReplyMessage = "USD Rate". "Today 1 USD is : " . $result->{'rates'}->THB." THB";
+                          $textReplyMessage = "USD Rate". "Today \n 1 USD is : " . $result->{'rates'}->THB." THB";
                         }else{
 			  $up_m = strtoupper($mid);
 			  $up_l = strtoupper($last);
                           $rates = $result->{'rates'}->$up_l / $result->{'rates'}->$up_m;
-                          $textReplyMessage = "$up_l Rate". "Today 1 $up_m is : " . $rates ." ". $up_l;
+                          $textReplyMessage = "$up_l Rate". "Today \n 1 $up_m is : " . $rates ." ". $up_l;
                         }
 			    
                         $replyData = new TextMessageBuilder($textReplyMessage);
