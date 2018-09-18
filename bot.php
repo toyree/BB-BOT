@@ -98,6 +98,7 @@ if(!is_null($events)){
                     break;
                 case "tong":
                 	require_once("tongcode.php");
+                	break;
                 case "tel":
               /*
                   IF ($mid <> ''){
