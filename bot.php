@@ -105,7 +105,7 @@ if(!is_null($events)){
                         $url = 'https://openexchangerates.org/api/latest.json?app_id=f23f7281781e426a9464af98371f1ae4';
 	                	$data = file_get_contents($url);
 						$result = json_decode($data);
-                        $textReplyMessage = "USD Rate". "<br> Today is : " . $result->{'rates'}->THB;
+                        $textReplyMessage = "USD Rate". "Today is : " . $result->{'rates'}->THB;
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;
                         }
