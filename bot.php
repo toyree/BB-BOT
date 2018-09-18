@@ -97,7 +97,16 @@ if(!is_null($events)){
                     $replyData = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);              
                     break;
                 case "tong":
-                	require_once("tongcode.php");
+                    IF($mid == '1'){
+                        $textReplyMessage = 'Tong Test 1';
+                        $replyData = new TextMessageBuilder($textReplyMessage);
+                        break;
+                        }else{
+                        $textReplyMessage = 'Tong Test 2';
+                        $replyData = new TextMessageBuilder($textReplyMessage);
+                        break;
+                        }
+
                 case "tel":
               /*
                   IF ($mid <> ''){
