@@ -117,7 +117,30 @@ if(!is_null($events)){
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;
                         }
-
+		//Add Rate By Toy -- START --			    
+		case "rate":
+                    IF($mid == '' || $mid == 'help' ){
+                        $textReplyMessage = 'การใช้คำสั่ง Rate ให้พิมพ์ตามรูปแบบนี้ rate-<currency คั้งต้น>-<currency ปลายทาง>';
+                        $replyData = new TextMessageBuilder($textReplyMessage);
+                        break;
+                        }elseif($mid <> '' && $mid <> 'help'){
+                        $url = 'https://openexchangerates.org/api/latest.json?app_id=f23f7281781e426a9464af98371f1ae4';
+	                	    $data = file_get_contents($url);
+						            $result = json_decode($data);
+			    
+                        if ($mid == 'usd' && $last == 'thb') {
+                          $textReplyMessage = "USD Rate". "Today 1 USD is : " . $result->{'rates'}->THB." THB";
+                        }else{
+			  $up_m = strtoupper($mid);
+			  $up_l = strtoupper($last);
+                          $rates = $result->{'rates'}->$up_l / $result->{'rates'}->$up_m;
+                          $textReplyMessage = "$up_l Rate". "Today 1 $up_m is : " . $rates ." ". $up_l;
+                        }
+			    
+                        $replyData = new TextMessageBuilder($textReplyMessage);
+                        break;
+                        }
+		//Add Rate By Toy -- END --
                 case "tel":
               /*
                   IF ($mid <> ''){
@@ -155,16 +178,8 @@ if(!is_null($events)){
                    break;
                   }
                   */
-              IF ($mid <> ''){
-               $textReplyMessage = "Toy1";
-               $replyData = new TextMessageBuilder($textReplyMessage);
-               break;
-              }ELSE{
-               $textReplyMessage = "Tong";
-               $replyData = new TextMessageBuilder($textReplyMessage);
-               break;
-              }
-                  /*
+
+                  
                     switch ($mid) {
                      case "arm":
                        $textReplyMessage = "เบอร์ติดต่อ เหยิน : 080-646-6594 , 083-090-8433";
@@ -199,7 +214,7 @@ if(!is_null($events)){
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;    
                     }
-                    */
+                    
                     break;
                 case "move":
                     switch ($mid) {
