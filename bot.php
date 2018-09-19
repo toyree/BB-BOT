@@ -63,7 +63,7 @@ if(!is_null($events)){
     $typeMessage = $events['events'][0]['message']['type'];
     $userMessage = $events['events'][0]['message']['text'];
     $userMessage = strtolower($userMessage);
-    list($first, $mid, $last) = explode('-', $userMessage);
+    list($first, $mid, $last, $lastf) = explode('-', $userMessage);
     switch ($typeMessage){
         case 'text':
             switch ($first) {
@@ -146,45 +146,50 @@ if(!is_null($events)){
                         break;
                         }
 		//Add Rate By Toy -- END --
-                case "tel":
-              /*
-                  IF ($mid <> ''){
-                    $telsql = "SELECT * FROM telephone where nickname = '.$mid.'";
-                    $telquery = mysql_query($telsql)or die("Can't Query ".mysql_error() . " Actual query: " . $telsql);
-                    $telchknum = mysql_num_rows($telquery);
-                    IF ($telchknum > 0){
-                      $telResult = mysql_fetch_array($telquery);
-                      $lv_tel_data = "F";
-                    }else{
-                     $telsql = "SELECT * FROM telephone where name = '.$mid.'";
-                     $telquery = mysql_query($telsql)or die("Can't Query ".mysql_error() . " Actual query: " . $telsql);
-                     $telchknum2 = mysql_num_rows($telquery);
-                     IF ($telchknum2 > 0){
-                      $telResult = mysql_fetch_array($telquery);
-                      $lv_tel_data = "F";
-                     }else{
-                      $lv_tel_data = "NF";
-                     }
-                    }
-                    
-                    switch ($lv_tel_data){
-                     case "F":
-                      $textReplyMessage = $telResult["name"]."(".$telResult["nickname"].") : ".$telResult["tel_no"];
-                      $replyData = new TextMessageBuilder($textReplyMessage);
-                      break;
-                     case "NF":
-                      $textReplyMessage = " ไม่พบข้อมูล ";
-                      $replyData = new TextMessageBuilder($textReplyMessage);
-                      break;
-                    }
-                  }else{
-                   $textReplyMessage = "กรุณาพิมพ์ tel-<ชื่อ> เพื่อสอบถามข้อมูลเบอร์โปรศัพท์";
-                   $replyData = new TextMessageBuilder($textReplyMessage);
-                   break;
-                  }
-                  */
+		
+		//Add Calculate Price with exchange rate --START--
+		case "cal":
+		        IF($mid == '' || $mid == 'help' ){
+			$textReplyMessage = 'การใช้คำสั่ง Cal ให้พิมพ์ตามรูปแบบนี้     cal-<ราคาสินค้า>-<currency คั้งต้น>-<currency ปลายทาง>';
+			$replyData = new TextMessageBuilder($textReplyMessage);
+			$textReplyMessage = 'หรือใช้คำสั่งในรูแปป  cal-<ราคาสินค้า>-<currency คั้งต้น> ระบบจะ default เป็น THB ให้เสมอ เช่น cal-100-jpy';
+			$replyData2 = new TextMessageBuilder($textReplyMessage);
+			break;
+			}elseif($mid <> '' && $mid <> 'help' && $last <> ''){
+			$url = 'https://openexchangerates.org/api/latest.json?app_id=f23f7281781e426a9464af98371f1ae4';
+				    $data = file_get_contents($url);
+							    $result = json_decode($data);
 
-                  
+			 if ($lastf == '') {
+			  $up_l = strtoupper($last);
+			  $rates = $result->{'rates'}->THB / $result->{'rates'}->$up_l;
+			 IF ($rates == 'INF'){
+				$textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
+			 }ELSE{
+			  	$prices = $rates * $mid;
+			  	$pf = number_format($prices, 2);
+			  	$textReplyMessage = "สินค้าชิ้นนี้ มีราคา : ". $pf. "บาทครับ";
+			 }
+			}else{
+			  $up_l = strtoupper($last);
+			  $up_lf = strtoupper($lastf);
+			  $rates = $result->{'rates'}->$up_lf / $result->{'rates'}->$up_l;
+			  IF ($rates == 'INF'){
+				$textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
+			  }else{
+				$prices = $rates * $mid;
+				$pf = number_format($prices, 2);
+				//$textReplyMessage = "$up_l Rate". "Today \n 1 $up_m is : " . $rates ." ". $up_l;
+				$textReplyMessage = "สินค้าชินนี้ มีราคา ".$pf." ".$up_lf;
+			  }
+			}
+
+			$replyData = new TextMessageBuilder($textReplyMessage);
+			break;
+                        }	    
+		//Add Calculate Price with exchange rate --END--
+			    
+                case "tel":
                     switch ($mid) {
                      case "arm":
                        $textReplyMessage = "เบอร์ติดต่อ เหยิน : 080-646-6594 , 083-090-8433";
@@ -304,8 +309,13 @@ if(!is_null($events)){
             break;  
     }
 }
-//l ส่วนของคำสั่งตอบกลับข้อความ
+// ส่วนของคำสั่งตอบกลับข้อความ
 $response = $bot->replyMessage($replyToken,$replyData);
+// Test Reply more 1 message --START--
+IF($replyData2 <> ''){
+$response2 = $bot->replyMessage($replyToken,$replyData2);
+}
+// Test Reply more 1 message --END--
 if ($response->isSucceeded()) {
     echo 'Succeeded!';
     return;
