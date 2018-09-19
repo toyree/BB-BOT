@@ -117,6 +117,7 @@ if(!is_null($events)){
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;
                         }
+			    
 		//Add Rate By Toy -- START --			    
 		case "rate":
                     IF($mid == '' || $mid == 'help' ){
@@ -168,7 +169,7 @@ if(!is_null($events)){
 			 }ELSE{
 			  	$prices = $rates * $mid;
 			  	$pf = number_format($prices, 2);
-			  	$textReplyMessage = "สินค้าชิ้นนี้ มีราคา : ". $pf. "บาทครับ";
+			  	$textReplyMessage = "สินค้าชิ้นนี้ มีราคา : ". $pf. " บาทครับ";
 			 }
 			}else{
 			  $up_l = strtoupper($last);
@@ -320,7 +321,13 @@ if ($response->isSucceeded()) {
     echo 'Succeeded!';
     return;
 }
+
+if ($response2->isSucceeded()) {
+    echo 'Succeeded!';
+    return;
+}
  
 // Failed
 echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+echo $response2->getHTTPStatus() . ' ' . $response->getRawBody();
 ?>
