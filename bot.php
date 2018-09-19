@@ -51,7 +51,8 @@ use LINE\LINEBot\MessageBuilder\TemplateBuilder\ImageCarouselColumnTemplateBuild
 // เชื่อมต่อกับ LINE Messaging API
 $httpClient = new CurlHTTPClient(LINE_MESSAGE_ACCESS_TOKEN);
 $bot = new LINEBot($httpClient, array('channelSecret' => LINE_MESSAGE_CHANNEL_SECRET));
- 
+$message = new MultiMessageBuilder();
+
 // คำสั่งรอรับการส่งค่ามาของ LINE Messaging API
 $content = file_get_contents('php://input');
  
@@ -310,24 +311,22 @@ if(!is_null($events)){
             break;  
     }
 }
+// ส่งข้อความกลับ หลายข้อความ
+$message->add( $replyData );
+$message->add ($replyData2 );
+$message->add( $replyData3 );
+$message->add( $replyData4 );
+$message->add( $replyData5 );
+
 // ส่วนของคำสั่งตอบกลับข้อความ
-$response = $bot->replyMessage($replyToken,$replyData);
-// Test Reply more 1 message --START--
-IF($replyData2 <> ''){
-$response2 = $bot->replyMessage($replyToken,$replyData2);
-}
-// Test Reply more 1 message --END--
+$response = $bot->replyMessage($replyToken,$message);
+
 if ($response->isSucceeded()) {
     echo 'Succeeded!';
     return;
 }
 
-if ($response2->isSucceeded()) {
-    echo 'Succeeded!';
-    return;
-}
- 
 // Failed
 echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
-echo $response2->getHTTPStatus() . ' ' . $response->getRawBody();
+
 ?>
