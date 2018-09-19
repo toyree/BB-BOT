@@ -72,7 +72,7 @@ if(!is_null($events)){
                     $replyData = new TextMessageBuilder($textReplyMessage);
                     break;
                 case "help":
-                    $textReplyMessage = "คำสั่งเบื้องต้น     I=>Image     Tel=>ตรวจเบอร์     Move=>เช็คตำแหน่ง";
+                    $textReplyMessage = "คำสั่งเบื้องต้น  Rate=> เช็คอัตราแลกเปลี่ยน   Cal=>คำนวณเงินตามอัตราแลกเปลี่ยน   Tel=>ตรวจเบอร์     Move=>เช็คตำแหน่ง";
                     $replyData = new TextMessageBuilder($textReplyMessage);
                     break;
                 case "i":
@@ -128,8 +128,9 @@ if(!is_null($events)){
 	                	    $data = file_get_contents($url);
 						            $result = json_decode($data);
 			    
-                        if ($mid == 'usd' && $last == 'thb') {
-                          $textReplyMessage = "THB Rate". "Today \n 1 USD is : " . $result->{'rates'}->THB." THB";
+                        if ($last == '') {
+			  $up_m = strtoupper($mid);
+                          $textReplyMessage = $up_m." Rate". "Today \n 1 USD is : " . $result->{'rates'}->$up_m." ".$up_m;
                         }else{
 			  $up_m = strtoupper($mid);
 			  $up_l = strtoupper($last);
