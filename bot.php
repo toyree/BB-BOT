@@ -314,9 +314,9 @@ if(!is_null($events)){
 // ส่งข้อความกลับ หลายข้อความ
 $message->add( $replyData );
 IF($replyData2 <> '') { $message->add( $replyData2 ); }
-IF($replyData2 <> '') { $message->add( $replyData3 ); }
-IF($replyData2 <> '') { $message->add( $replyData4 ); }
-IF($replyData2 <> '') { $message->add( $replyData5 ); }
+IF($replyData3 <> '') { $message->add( $replyData3 ); }
+IF($replyData4 <> '') { $message->add( $replyData4 ); }
+IF($replyData5 <> '') { $message->add( $replyData5 ); }
 
 // ส่วนของคำสั่งตอบกลับข้อความ
 $response = $bot->replyMessage($replyToken,$message);
