@@ -64,7 +64,7 @@ if(!is_null($events)){
     $typeMessage = $events['events'][0]['message']['type'];
     $userMessage = $events['events'][0]['message']['text'];
     $userMessage = strtolower($userMessage);
-    list($first, $mid, $last, $lastf) = explode('-', $userMessage);
+    list($first, $mid, $last, $lastf) = explode(' ', $userMessage);
     switch ($typeMessage){
         case 'text':
             switch ($first) {
