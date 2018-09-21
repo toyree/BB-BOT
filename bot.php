@@ -97,28 +97,7 @@ if(!is_null($events)){
                     $longitude = 100.61141967773438;
                     $replyData = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);              
                     break;
-                case "tong":
-                    IF($mid == '1'){
-                        $textReplyMessage = 'Tong Test 1';
-                        $replyData = new TextMessageBuilder($textReplyMessage);
-                        break;
-                        }elseif($mid == 'rates'){
-                        $url = 'https://openexchangerates.org/api/latest.json?app_id=f23f7281781e426a9464af98371f1ae4';
-	                	    $data = file_get_contents($url);
-						            $result = json_decode($data);
-                        if ($last == 'usd') {
-                          $textReplyMessage = "USD Rate". "Today is : " . $result->{'rates'}->THB;
-                        }elseif ($last == 'jpy') {
-                          $rates = $result->{'rates'}->JPY / $result->{'rates'}->THB;
-                          $textReplyMessage = "JPY Rate". "Today is : " . $rates;
-                        }elseif ($last == 'nzd') {
-                          $rates = $result->{'rates'}->THB / $result->{'rates'}->NZD;
-                          $textReplyMessage = "NZD Rate". "Today is : " . $rates;
-                        }
-                        $replyData = new TextMessageBuilder($textReplyMessage);
-                        break;
-                        }
-			    
+			    	    
 		//Add Rate By Toy -- START --			    
 		case "rate":
                     IF($mid == '' || $mid == 'help' ){
@@ -132,21 +111,29 @@ if(!is_null($events)){
 			    
                         if ($last == '') {
 			  $up_m = strtoupper($mid);
+			  $rate1 = $result->{'rates'}->$up_m;
+			  if($rate1 == null){
+				  $textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
+			  }else{
                           $textReplyMessage = $up_m." Rate". "Today \n 1 USD is : " . $result->{'rates'}->$up_m." ".$up_m;
+			  }
                         }else{
 			  $up_m = strtoupper($mid);
 			  $up_l = strtoupper($last);
-                          $rates = $result->{'rates'}->$up_l / $result->{'rates'}->$up_m;
-			  IF ($rates == 'INF' || $rates == 'inf' || $rates == 'NAN' || $rates == 'nan'){
-				$textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
+			  $rate1 = $result->{'rates'}->$up_l;
+			  $rate2 = $result->{'rates'}->$up_m;
+			  if($rate1 == null || $rate2 == null){
+				  $textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
 			  }else{
-                          	$textReplyMessage = "$up_l Rate". "Today \n 1 $up_m is : " . $rates ." ". $up_l;
+				  $rates = $result->{'rates'}->$up_l / $result->{'rates'}->$up_m;
+				  $textReplyMessage = "$up_l Rate". "Today \n 1 $up_m is : " . $rates ." ". $up_l;
 			  }
                         }
 			    
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;
                         }
+			    
 		//Add Rate By Toy -- END --
 		
 		//Add Calculate Price with exchange rate --START--
@@ -164,25 +151,29 @@ if(!is_null($events)){
 
 			 if ($lastf == '') {
 			  $up_l = strtoupper($last);
-			  $rates = $result->{'rates'}->THB / $result->{'rates'}->$up_l;
-			 IF ($rates == 'INF' || $rates == 'inf' || $rates == 'NAN' || $rates == 'nan'){
-				$textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
-			 }ELSE{
-			  	$prices = $rates * $mid;
-			  	$pf = number_format($prices, 2);
-			  	$textReplyMessage = "สินค้าชิ้นนี้ มีราคา : ". $pf. " บาทครับ";
-			 }
+			  $rate1 = $result->{'rates'}->$up_l;
+			  if($rate1 == null){
+				 $textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง"; 
+			  }else{
+				 $rates = $result->{'rates'}->THB / $result->{'rates'}->$up_l;
+			  	 $prices = $rates * $mid;
+			  	 $pf = number_format($prices, 2);
+			  	 $textReplyMessage = "สินค้าชิ้นนี้ มีราคา : ". $pf. " บาทครับ"; 
+			  }
+				 
 			}else{
 			  $up_l = strtoupper($last);
 			  $up_lf = strtoupper($lastf);
-			  $rates = $result->{'rates'}->$up_lf / $result->{'rates'}->$up_l;
-			  IF ($rates == 'INF' || $rates == 'inf' || $rates == 'NAN' || $rates == 'nan'){
-				$textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
+			  $rate1 = $result->{'rates'}->$up_lf;
+			  $rate2 = $result->{'rates'}->$up_l;
+			  if( $rate1 == null || $rate2 == null){
+				  $textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
 			  }else{
-				$prices = $rates * $mid;
-				$pf = number_format($prices, 2);
-				//$textReplyMessage = "$up_l Rate". "Today \n 1 $up_m is : " . $rates ." ". $up_l;
-				$textReplyMessage = "สินค้าชินนี้ มีราคา ".$pf." ".$up_lf;
+				  $rates = $result->{'rates'}->$up_lf / $result->{'rates'}->$up_l;
+				  $prices = $rates * $mid;
+				  $pf = number_format($prices, 2);
+				  //$textReplyMessage = "$up_l Rate". "Today \n 1 $up_m is : " . $rates ." ". $up_l;
+				  $textReplyMessage = "สินค้าชินนี้ มีราคา ".$pf." ".$up_lf;
 			  }
 			}
 
@@ -197,7 +188,7 @@ if(!is_null($events)){
 			$sticker_id = $sticker_id_rand[mt_rand(0, count($sticker_id_rand) - 1)];	
 			$stickerID = $sticker_id;
                     	$packageID = $sticker_pack;
-                    	$replyData2 = new StickerMessageBuilder($packageID,$stickerID);
+                    	$replyData3 = new StickerMessageBuilder($packageID,$stickerID);
 			break;
                         }	    
 		//Add Calculate Price with exchange rate --END--
