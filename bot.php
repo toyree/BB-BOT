@@ -127,8 +127,8 @@ if(!is_null($events)){
                         break;
                         }elseif($mid <> '' && $mid <> 'help'){
                         $url = 'https://openexchangerates.org/api/latest.json?app_id=f23f7281781e426a9464af98371f1ae4';
-	                	    $data = file_get_contents($url);
-						            $result = json_decode($data);
+	               	$data = file_get_contents($url);
+			$result = json_decode($data);
 			    
                         if ($last == '') {
 			  $up_m = strtoupper($mid);
@@ -137,7 +137,7 @@ if(!is_null($events)){
 			  $up_m = strtoupper($mid);
 			  $up_l = strtoupper($last);
                           $rates = $result->{'rates'}->$up_l / $result->{'rates'}->$up_m;
-			  IF ($rates == 'INF'){
+			  IF ($rates == 'INF' || $rates == 'inf' || $rates == 'NAN' || $rates == 'nan'){
 				$textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
 			  }else{
                           	$textReplyMessage = "$up_l Rate". "Today \n 1 $up_m is : " . $rates ." ". $up_l;
@@ -159,13 +159,13 @@ if(!is_null($events)){
 			break;
 			}elseif($mid <> '' && $mid <> 'help' && $last <> ''){
 			$url = 'https://openexchangerates.org/api/latest.json?app_id=f23f7281781e426a9464af98371f1ae4';
-				    $data = file_get_contents($url);
-							    $result = json_decode($data);
+			$data = file_get_contents($url);
+			$result = json_decode($data);
 
 			 if ($lastf == '') {
 			  $up_l = strtoupper($last);
 			  $rates = $result->{'rates'}->THB / $result->{'rates'}->$up_l;
-			 IF ($rates == 'INF'){
+			 IF ($rates == 'INF' || $rates == 'inf' || $rates == 'NAN' || $rates == 'nan'){
 				$textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
 			 }ELSE{
 			  	$prices = $rates * $mid;
@@ -176,7 +176,7 @@ if(!is_null($events)){
 			  $up_l = strtoupper($last);
 			  $up_lf = strtoupper($lastf);
 			  $rates = $result->{'rates'}->$up_lf / $result->{'rates'}->$up_l;
-			  IF ($rates == 'INF'){
+			  IF ($rates == 'INF' || $rates == 'inf' || $rates == 'NAN' || $rates == 'nan'){
 				$textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
 			  }else{
 				$prices = $rates * $mid;
@@ -187,6 +187,17 @@ if(!is_null($events)){
 			}
 
 			$replyData = new TextMessageBuilder($textReplyMessage);
+			$sticker_pack = rand(1,2);
+			//for command cal only
+			if($sticker_pack == '1'){
+				$sticker_id_rand = ['2','10','13','106','107','114','116','120','122','132','407','409','410','417','426','428']; 
+			}else{
+				$sticker_id_rand = ['22','28','45','140','144','156','157','158','167','172','176','177','512'];
+			}
+			$sticker_id = $sticker_id_rand[mt_rand(0, count($sticker_id_rand) - 1)];	
+			$stickerID = $sticker_id;
+                    	$packageID = $sticker_pack;
+                    	$replyData2 = new StickerMessageBuilder($packageID,$stickerID);
 			break;
                         }	    
 		//Add Calculate Price with exchange rate --END--
