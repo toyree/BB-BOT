@@ -216,20 +216,52 @@ if(!is_null($events)){
                     }
                 //Register Line Account to  BB-Bot System
                 case "regis":
-                    switch ($mid) {
-                      case "":
-                         $textReplyMessage = "กรุณาพิมพ์ regis <ชื่อของคุณ> เพื่อลงทะเบียน";
-                         $replyData = new TextMessageBuilder($textReplyMessage);
-                         break;
-                         
-                      default:
-                        //$url = 'https://www.trswork.com/linebot/tel2.php?api=BB-BOT-XYZ&name='.$mid;
-                        //$data = file_get_contents($url);
+                    if($mid != '' && $last == ''){
+                        switch ($mid) {
+                            case "":
+                                $textReplyMessage = "กรุณาพิมพ์ regis <ชื่อของคุณ> เพื่อลงทะเบียน";
+                                $replyData = new TextMessageBuilder($textReplyMessage);
+                                break;
 
-                        //$textReplyMessage = $data;
-                        $textReplyMessage = 'ยังไม่เปิดให้บริการ';
-                        $replyData = new TextMessageBuilder($textReplyMessage);
-                        break;    
+                            case "cancel":
+                                $textReplyMessage = "ระบบยกเลิกการ ลงทะเบียน เรียบร้อย";
+                                $replyData = new TextMessageBuilder($textReplyMessage);
+
+                                $textReplyMessage = "หากต้องการลงทะเบียนใหม่ กรุณาพิมพ์ regis <ชื่อของคุณ> เพื่อลงทะเบียน";
+                                $replyData2 = new TextMessageBuilder($textReplyMessage);
+                                break;
+                             
+                            default:
+                                $replyData = new TemplateMessageBuilder('Confirm register with BB-BOT',
+                                            new ConfirmTemplateBuilder(
+                                                'Confirm Register BB-BOT with name is : '.$mid,
+                                                array(
+                                                    new MessageTemplateActionBuilder(
+                                                        'Yes',
+                                                        'regis '.$mid.' Yes'
+                                                    ),
+                                                    new MessageTemplateActionBuilder(
+                                                        'No',
+                                                        'regis cancel'
+                                                    )
+                                                )
+                                            )
+                                        );
+                                break;    
+                        }
+                    }elseif($mid != '' && $last != ''){
+
+                        switch ($last) {
+                            case 'yes':
+                                $textReplyMessage = 'ยังไม่เปิดให้บริการ';
+                                $replyData = new TextMessageBuilder($textReplyMessage);
+                                break;
+
+                            default:
+                                $textReplyMessage = 'กรุณา กดปุ่มจากหน้าจอ Confirm ผ่านมือถือ เท่านั้น!';
+                                $replyData = new TextMessageBuilder($textReplyMessage);
+                                break;
+                        }
                     }
                 //For test new command
                 case "test":
