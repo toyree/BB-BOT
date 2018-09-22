@@ -102,103 +102,103 @@ if(!is_null($events)){
                     $longitude = 100.61141967773438;
                     $replyData = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);              
                     break;
-			    	    
-		//Add Rate By Toy -- START --			    
-		case "rate":
+                        
+                //Add Rate By Toy -- START --               
+                case "rate":
                     IF($mid == '' || $mid == 'help' ){
                         $textReplyMessage = 'การใช้คำสั่ง Rate ให้พิมพ์ตามรูปแบบนี้     rate-<currency คั้งต้น>-<currency ปลายทาง>';
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;
                         }elseif($mid <> '' && $mid <> 'help'){
                             $url = 'https://openexchangerates.org/api/latest.json?app_id=f23f7281781e426a9464af98371f1ae4';
-    	               	    $data = file_get_contents($url);
-    			            $result = json_decode($data);
-			    
+                            $data = file_get_contents($url);
+                            $result = json_decode($data);
+                
                         if ($last == '') {
-			                $up_m = strtoupper($mid);
-			                $rate1 = $result->{'rates'}->$up_m;
-			                if($rate1 == null){
-				                $textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
-			                }else{
+                            $up_m = strtoupper($mid);
+                            $rate1 = $result->{'rates'}->$up_m;
+                            if($rate1 == null){
+                                $textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
+                            }else{
                                 $textReplyMessage = $up_m." Rate". "Today \n 1 USD is : " . $result->{'rates'}->$up_m." ".$up_m;
-			                }
+                            }
                         }else{
-                			$up_m = strtoupper($mid);
-                			$up_l = strtoupper($last);
-                			$rate1 = $result->{'rates'}->$up_l;
-                			$rate2 = $result->{'rates'}->$up_m;
+                            $up_m = strtoupper($mid);
+                            $up_l = strtoupper($last);
+                            $rate1 = $result->{'rates'}->$up_l;
+                            $rate2 = $result->{'rates'}->$up_m;
 
-			                if($rate1 == null || $rate2 == null){
-                				$textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
-                			}else{
-                			    $rates = $result->{'rates'}->$up_l / $result->{'rates'}->$up_m;
-                				$textReplyMessage = "$up_l Rate". "Today \n 1 $up_m is : " . $rates ." ". $up_l;
-                			}
+                            if($rate1 == null || $rate2 == null){
+                                $textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
+                            }else{
+                                $rates = $result->{'rates'}->$up_l / $result->{'rates'}->$up_m;
+                                $textReplyMessage = "$up_l Rate". "Today \n 1 $up_m is : " . $rates ." ". $up_l;
+                            }
                         }
-			    
+                
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;
                         }
-			    
-		//Add Rate By Toy -- END --
-		
-		//Add Calculate Price with exchange rate --START--
-		case "cal":
-		        IF($mid == '' || $mid == 'help' ){
-			$textReplyMessage = 'การใช้คำสั่ง Cal ให้พิมพ์ตามรูปแบบนี้     cal-<ราคาสินค้า>-<currency คั้งต้น>-<currency ปลายทาง>';
-			$replyData = new TextMessageBuilder($textReplyMessage);
-			$textReplyMessage = 'หรือใช้คำสั่งในรูแปป  cal-<ราคาสินค้า>-<currency คั้งต้น> ระบบจะ default เป็น THB ให้เสมอ เช่น cal-100-jpy';
-			$replyData2 = new TextMessageBuilder($textReplyMessage);
-			break;
-			}elseif($mid <> '' && $mid <> 'help' && $last <> ''){
-    			$url = 'https://openexchangerates.org/api/latest.json?app_id=f23f7281781e426a9464af98371f1ae4';
-    			$data = file_get_contents($url);
-    			$result = json_decode($data);
+                
+                //Add Rate By Toy -- END --
+        
+                //Add Calculate Price with exchange rate --START--
+                case "cal":
+                    IF($mid == '' || $mid == 'help' ){
+                        $textReplyMessage = 'การใช้คำสั่ง Cal ให้พิมพ์ตามรูปแบบนี้     cal-<ราคาสินค้า>-<currency คั้งต้น>-<currency ปลายทาง>';
+                        $replyData = new TextMessageBuilder($textReplyMessage);
+                        $textReplyMessage = 'หรือใช้คำสั่งในรูแปป  cal-<ราคาสินค้า>-<currency คั้งต้น> ระบบจะ default เป็น THB ให้เสมอ เช่น cal-100-jpy';
+                        $replyData2 = new TextMessageBuilder($textReplyMessage);
+                        break;
+                    }elseif($mid <> '' && $mid <> 'help' && $last <> ''){
+                        $url = 'https://openexchangerates.org/api/latest.json?app_id=f23f7281781e426a9464af98371f1ae4';
+                        $data = file_get_contents($url);
+                        $result = json_decode($data);
 
-			 if ($lastf == '') {
-			  $up_l = strtoupper($last);
-			  $rate1 = $result->{'rates'}->$up_l;
-			  if($rate1 == null){
-				 $textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง"; 
-			  }else{
-				 $rates = $result->{'rates'}->THB / $result->{'rates'}->$up_l;
-			  	 $prices = $rates * $mid;
-			  	 $pf = number_format($prices, 2);
-			  	 $textReplyMessage = "สินค้าชิ้นนี้ มีราคา : ". $pf. " บาทครับ"; 
-			  }
-				 
-			}else{
-			  $up_l = strtoupper($last);
-			  $up_lf = strtoupper($lastf);
-			  $rate1 = $result->{'rates'}->$up_lf;
-			  $rate2 = $result->{'rates'}->$up_l;
-			  if( $rate1 == null || $rate2 == null){
-				  $textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
-			  }else{
-				  $rates = $result->{'rates'}->$up_lf / $result->{'rates'}->$up_l;
-				  $prices = $rates * $mid;
-				  $pf = number_format($prices, 2);
-				  //$textReplyMessage = "$up_l Rate". "Today \n 1 $up_m is : " . $rates ." ". $up_l;
-				  $textReplyMessage = "สินค้าชินนี้ มีราคา ".$pf." ".$up_lf;
-			  }
-			}
+                         if ($lastf == '') {
+                          $up_l = strtoupper($last);
+                          $rate1 = $result->{'rates'}->$up_l;
+                          if($rate1 == null){
+                             $textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง"; 
+                          }else{
+                             $rates = $result->{'rates'}->THB / $result->{'rates'}->$up_l;
+                             $prices = $rates * $mid;
+                             $pf = number_format($prices, 2);
+                             $textReplyMessage = "สินค้าชิ้นนี้ มีราคา : ". $pf. " บาทครับ"; 
+                          }
+                 
+                        }else{
+                          $up_l = strtoupper($last);
+                          $up_lf = strtoupper($lastf);
+                          $rate1 = $result->{'rates'}->$up_lf;
+                          $rate2 = $result->{'rates'}->$up_l;
+                          if( $rate1 == null || $rate2 == null){
+                              $textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
+                          }else{
+                              $rates = $result->{'rates'}->$up_lf / $result->{'rates'}->$up_l;
+                              $prices = $rates * $mid;
+                              $pf = number_format($prices, 2);
+                              //$textReplyMessage = "$up_l Rate". "Today \n 1 $up_m is : " . $rates ." ". $up_l;
+                              $textReplyMessage = "สินค้าชินนี้ มีราคา ".$pf." ".$up_lf;
+                            }
+                        }
 
-			$replyData = new TextMessageBuilder($textReplyMessage);
-			$sticker_pack = rand(1,2);
-			//for command cal only
-			if($sticker_pack == '1'){
-				$sticker_id_rand = ['2','10','13','106','107','114','116','120','122','132','407','409','410','417','426','428']; 
-			}else{
-				$sticker_id_rand = ['22','28','45','140','144','156','157','158','167','172','176','177','512'];
-			}
-			$sticker_id = $sticker_id_rand[mt_rand(0, count($sticker_id_rand) - 1)];	
-			$stickerID = $sticker_id;
-                    	$packageID = $sticker_pack;
-                    	$replyData3 = new StickerMessageBuilder($packageID,$stickerID);
-			break;
-                        }	    
-		//Add Calculate Price with exchange rate --END--
-			    
+                    $replyData = new TextMessageBuilder($textReplyMessage);
+                    $sticker_pack = rand(1,2);
+                    //for command cal only
+                    if($sticker_pack == '1'){
+                        $sticker_id_rand = ['2','10','13','106','107','114','116','120','122','132','407','409','410','417','426','428']; 
+                    }else{
+                        $sticker_id_rand = ['22','28','45','140','144','156','157','158','167','172','176','177','512'];
+                    }
+                    $sticker_id = $sticker_id_rand[mt_rand(0, count($sticker_id_rand) - 1)];    
+                    $stickerID = $sticker_id;
+                    $packageID = $sticker_pack;
+                    $replyData3 = new StickerMessageBuilder($packageID,$stickerID);
+                    break;
+                }
+            //Add Calculate Price with exchange rate --END--
+                
                 case "tel":
                     switch ($mid) {
                       case "":
@@ -214,6 +214,7 @@ if(!is_null($events)){
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;    
                     }
+
                 //Register Line Account to  BB-Bot System
                 case "regis":
                     if($mid != '' && $last == ''){
@@ -267,6 +268,7 @@ if(!is_null($events)){
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;
                     }
+                    break;
                 
                 //For test new command
                 case "test":
