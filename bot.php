@@ -209,7 +209,7 @@ if(!is_null($events)){
                          $replyData = new TextMessageBuilder($textReplyMessage);
                          break;
                       case "test":
-                        $url = 'https://www.trswork.com/linebot/tel2.php?api=BB-BOT-XYZ';
+                        $url = 'https://www.trswork.com/linebot/tel2.php?api=BB-BOT-XYZ&name='.$mid;
                         $data = file_get_contents($url);
                         
                         $textReplyMessage = $data;
