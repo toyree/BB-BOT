@@ -69,7 +69,7 @@ if(!is_null($events)){
     $userId = $events['events'][0]['source']['userId'];
     $userType = $events['events'][0]['source']['type']; //user
 
-    list($first, $mid, $last, $lastf) = explode(' ', $userMessage);
+    list($first, $mid, $last, $lastf, $confirm) = explode(' ', $userMessage);
     switch ($typeMessage){
         case 'text':
             switch ($first) {
@@ -201,18 +201,54 @@ if(!is_null($events)){
                 
                 case "tel":
                     switch ($mid) {
-                      case "":
+                      case "" or "help":
                          $textReplyMessage = "กรุณาพิมพ์ tel <ชื่อ> เพื่อสอบถามข้อมูลเบอร์โปรศัพท์";
                          $replyData = new TextMessageBuilder($textReplyMessage);
                          break;
                          
                       default:
-                        $url = 'https://www.trswork.com/linebot/tel2.php?api=BB-BOT-XYZ&name='.$mid;
+                        $url = 'https://www.trswork.com/linebot/tel.php?api=BB-BOT-XYZ&name='.$mid;
                         $data = file_get_contents($url);
 
                         $textReplyMessage = $data;
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;    
+                    }
+                    break;
+
+                //ADD Data to database use command 'add'
+                 case "add":
+                    switch ($mid) {
+                      case "" or "help":
+                         $textReplyMessage = "กรุณาพิมพ์ add <ชื่อข้อมูลที่ต้องการเพิ่ม>";
+                         $replyData = new TextMessageBuilder($textReplyMessage);
+
+                         $textReplyMessage = "เช่น add tel 0891234567 ais \"n หรือ \"n add tel 0891234567 ";
+                         $replyData2 = new TextMessageBuilder($textReplyMessage);
+                         break;
+
+                    case "tel" :
+                        if($last == '' && $lastf == ''){
+                            $textReplyMessage = "กรุณาระบุ เบอร์โทรศัพท์ และ เครือข่าย ของท่าน";
+                            $replyData = new TextMessageBuilder($textReplyMessage);
+
+                            $textReplyMessage = "เช่น add tel 0891234567 ais เป็นต้น";
+                            $replyData2 = new TextMessageBuilder($textReplyMessage);
+                        }elseif ($last != '' && $lastf == '') {
+                            $textReplyMessage = "กรุณาระบุ เครือข่าย ของท่าน";
+                            $replyData = new TextMessageBuilder($textReplyMessage);
+
+                            $textReplyMessage = "เช่น add tel ".$last." ais เป็นต้น";
+                            $replyData2 = new TextMessageBuilder($textReplyMessage);
+                        }else{
+                            //$url = 'https://www.trswork.com/linebot/tel2.php?api=BB-BOT-XYZ&name='.$mid;
+                            //$data = file_get_contents($url);
+                            //$textReplyMessage = $data;
+                            $textReplyMessage = "ระบบ ยังไม่เปิด บริการ เพิ่มหมายเลขโทรศัพท์";
+                            $replyData = new TextMessageBuilder($textReplyMessage);
+                        }
+
+                         break;
                     }
                     break;
 
@@ -255,7 +291,11 @@ if(!is_null($events)){
 
                         switch ($last) {
                             case 'yes':
-                                $textReplyMessage = 'ยังไม่เปิดให้บริการ';
+                                $userId = md5($userId);
+                                $url = 'https://www.trswork.com/linebot/regis.php?api=BB-BOT-REGISTER&name='.$mid.'&uid='.$userId;
+                                $data = file_get_contents($url);
+
+                                $textReplyMessage = $data;
                                 $replyData = new TextMessageBuilder($textReplyMessage);
                                 break;
 
@@ -271,7 +311,7 @@ if(!is_null($events)){
                     }
                     break;
                 
-                //For test new command
+                //For test new command only
                 case "test":
                     switch ($mid) {
                         case "":
@@ -295,6 +335,8 @@ if(!is_null($events)){
                     }
                     
                     break;
+
+
                 case "move":
                     switch ($mid) {
                      case "arm":
@@ -327,11 +369,15 @@ if(!is_null($events)){
                        break;    
                     }
                 break;
+
+                /*
+
                 case "s":
                     $stickerID = 22;
                     $packageID = 2;
                     $replyData = new StickerMessageBuilder($packageID,$stickerID);
-                    break;      
+                    break;
+
                 case "im":
                     $imageMapUrl = 'https://www.mywebsite.com/imgsrc/photos/w/sampleimagemap';
                     $replyData = new ImagemapMessageBuilder(
@@ -366,6 +412,7 @@ if(!is_null($events)){
                         )
                     );
                     break;
+                    */
                 //default:
                     //$textReplyMessage = "คำสั่งไม่ถูกต้อง กรุณาพิมพ์ HELP เพื่อตรวจสอบคำสั่ง";
                     //$replyData = new TextMessageBuilder($textReplyMessage);         
@@ -373,9 +420,9 @@ if(!is_null($events)){
             }
             break;
         default:
-            $textReplyMessage = json_encode($events);
+            //$textReplyMessage = json_encode($events);
             //$replyData = new TextMessageBuilder($textReplyMessage);
-            $replyData = new TextMessageBuilder($userId." ".$userType);
+            //$replyData = new TextMessageBuilder($userId." ".$userType);
             break;  
     }
 }
