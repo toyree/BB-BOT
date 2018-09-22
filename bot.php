@@ -64,6 +64,11 @@ if(!is_null($events)){
     $typeMessage = $events['events'][0]['message']['type'];
     $userMessage = $events['events'][0]['message']['text'];
     $userMessage = strtolower($userMessage);
+
+    //Get User ID and Type
+    $userId = $events['events'][0]['source']['userId'];
+    $userType = $events['events'][0]['source']['type']; //user
+
     list($first, $mid, $last, $lastf) = explode(' ', $userMessage);
     switch ($typeMessage){
         case 'text':
@@ -329,7 +334,8 @@ if(!is_null($events)){
             break;
         default:
             $textReplyMessage = json_encode($events);
-            $replyData = new TextMessageBuilder($textReplyMessage);         
+            //$replyData = new TextMessageBuilder($textReplyMessage);
+            $replyData = new TextMessageBuilder($userId." ".$userType);
             break;  
     }
 }
