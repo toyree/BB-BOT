@@ -57,7 +57,6 @@ $message = new MultiMessageBuilder();
 $content = file_get_contents('php://input');
  
 // แปลงข้อความรูปแบบ JSON  ให้อยู่ในโครงสร้างตัวแปร array
-//test
 $events = json_decode($content, true);
 if(!is_null($events)){
     // ถ้ามีค่า สร้างตัวแปรเก็บ replyToken ไว้ใช้งาน
