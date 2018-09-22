@@ -196,39 +196,8 @@ if(!is_null($events)){
 			    
                 case "tel":
                     switch ($mid) {
-                        /*
-                     case "arm":
-                       $textReplyMessage = "เบอร์ติดต่อ เหยิน : 080-646-6594 , 083-090-8433";
-                       $replyData = new TextMessageBuilder($textReplyMessage);
-                       break;
-                     case "toy":
-                         $textReplyMessage = "เบอร์ติดต่อ ทอย: 089-245-2436";
-                         $replyData = new TextMessageBuilder($textReplyMessage);
-                         break;
-                      case "tong":
-                         $textReplyMessage = "เบอร์ติดต่อ ตง: 089-XXX-XXXX";
-                         $replyData = new TextMessageBuilder($textReplyMessage);
-                         break;
-                      case "test":
-                        $url = 'https://www.trswork.com/linebot/tel2.php?api=BB-BOT-XYZ&name='.$mid;
-                        $data = file_get_contents($url);
-                        
-                        $textReplyMessage = $data;
-                        $replyData = new TextMessageBuilder($textReplyMessage);
-                        break;
-                      case "pum":
-                         $textReplyMessage = "เบอร์ติดต่อ ปุ้ม : 097-220-2000";
-                         $replyData = new TextMessageBuilder($textReplyMessage);
-                         break;
-
-                      case "list":
-                         $textReplyMessage = "คุณสามารถพิมพ์รายชื่อ ได้ตามด้านล่าง Arm | Toy | Pum | Test";
-                         $replyData = new TextMessageBuilder($textReplyMessage);
-                         break;
-                         */
-
                       case "":
-                         $textReplyMessage = "กรุณาพิมพ์ tel-<ชื่อ> เพื่อสอบถามข้อมูลเบอร์โปรศัพท์";
+                         $textReplyMessage = "กรุณาพิมพ์ tel <ชื่อ> เพื่อสอบถามข้อมูลเบอร์โปรศัพท์";
                          $replyData = new TextMessageBuilder($textReplyMessage);
                          break;
                          
@@ -239,6 +208,45 @@ if(!is_null($events)){
                         $textReplyMessage = $data;
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;    
+                    }
+                //Register Line Account to  BB-Bot System
+                case "regis":
+                    switch ($mid) {
+                      case "":
+                         $textReplyMessage = "กรุณาพิมพ์ regis <ชื่อของคุณ> เพื่อลงทะเบียน";
+                         $replyData = new TextMessageBuilder($textReplyMessage);
+                         break;
+                         
+                      default:
+                        //$url = 'https://www.trswork.com/linebot/tel2.php?api=BB-BOT-XYZ&name='.$mid;
+                        //$data = file_get_contents($url);
+
+                        //$textReplyMessage = $data;
+                        $textReplyMessage = 'ยังไม่เปิดให้บริการ';
+                        $replyData = new TextMessageBuilder($textReplyMessage);
+                        break;    
+                    }
+                //For test new command
+                case "test":
+                    switch ($mid) {
+                        case "":
+                            $textReplyMessage = "Test System";
+                            $replyData = new TextMessageBuilder($textReplyMessage);
+                            break;
+
+                        case "con": //Confirm Menu
+                            $textReplyMessage = "Confirm System";
+                            $replyData = new TextMessageBuilder($textReplyMessage);
+                            break;
+                         
+                        default:
+                            //$url = 'https://www.trswork.com/linebot/tel2.php?api=BB-BOT-XYZ&name='.$mid;
+                            //$data = file_get_contents($url);
+
+                            //$textReplyMessage = $data;
+                            $textReplyMessage = 'ยังไม่เปิดให้บริการ';
+                            $replyData = new TextMessageBuilder($textReplyMessage);
+                            break;    
                     }
                     
                     break;
@@ -320,8 +328,8 @@ if(!is_null($events)){
             }
             break;
         default:
-            //$textReplyMessage = json_encode($events);
-            //$replyData = new TextMessageBuilder($textReplyMessage);         
+            $textReplyMessage = json_encode($events);
+            $replyData = new TextMessageBuilder($textReplyMessage);         
             break;  
     }
 }
