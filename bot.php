@@ -196,6 +196,7 @@ if(!is_null($events)){
 			    
                 case "tel":
                     switch ($mid) {
+                        /*
                      case "arm":
                        $textReplyMessage = "เบอร์ติดต่อ เหยิน : 080-646-6594 , 083-090-8433";
                        $replyData = new TextMessageBuilder($textReplyMessage);
@@ -219,16 +220,23 @@ if(!is_null($events)){
                          $textReplyMessage = "เบอร์ติดต่อ ปุ้ม : 097-220-2000";
                          $replyData = new TextMessageBuilder($textReplyMessage);
                          break;
+
                       case "list":
                          $textReplyMessage = "คุณสามารถพิมพ์รายชื่อ ได้ตามด้านล่าง Arm | Toy | Pum | Test";
                          $replyData = new TextMessageBuilder($textReplyMessage);
                          break;
+                         */
+
                       case "":
                          $textReplyMessage = "กรุณาพิมพ์ tel-<ชื่อ> เพื่อสอบถามข้อมูลเบอร์โปรศัพท์";
                          $replyData = new TextMessageBuilder($textReplyMessage);
                          break;
+                         
                       default:
-                        $textReplyMessage = " ไม่พบข้อมูล ";
+                        $url = 'https://www.trswork.com/linebot/tel2.php?api=BB-BOT-XYZ&name='.$mid;
+                        $data = file_get_contents($url);
+
+                        $textReplyMessage = $data;
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;    
                     }
