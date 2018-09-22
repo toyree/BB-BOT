@@ -214,6 +214,7 @@ if(!is_null($events)){
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;    
                     }
+                    break;
 
                 //Register Line Account to  BB-Bot System
                 case "regis":
