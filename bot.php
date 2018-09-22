@@ -105,29 +105,30 @@ if(!is_null($events)){
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;
                         }elseif($mid <> '' && $mid <> 'help'){
-                        $url = 'https://openexchangerates.org/api/latest.json?app_id=f23f7281781e426a9464af98371f1ae4';
-	               	$data = file_get_contents($url);
-			$result = json_decode($data);
+                            $url = 'https://openexchangerates.org/api/latest.json?app_id=f23f7281781e426a9464af98371f1ae4';
+    	               	    $data = file_get_contents($url);
+    			            $result = json_decode($data);
 			    
                         if ($last == '') {
-			  $up_m = strtoupper($mid);
-			  $rate1 = $result->{'rates'}->$up_m;
-			  if($rate1 == null){
-				  $textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
-			  }else{
-                          $textReplyMessage = $up_m." Rate". "Today \n 1 USD is : " . $result->{'rates'}->$up_m." ".$up_m;
-			  }
+			                $up_m = strtoupper($mid);
+			                $rate1 = $result->{'rates'}->$up_m;
+			                if($rate1 == null){
+				                $textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
+			                }else{
+                                $textReplyMessage = $up_m." Rate". "Today \n 1 USD is : " . $result->{'rates'}->$up_m." ".$up_m;
+			                }
                         }else{
-			  $up_m = strtoupper($mid);
-			  $up_l = strtoupper($last);
-			  $rate1 = $result->{'rates'}->$up_l;
-			  $rate2 = $result->{'rates'}->$up_m;
-			  if($rate1 == null || $rate2 == null){
-				  $textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
-			  }else{
-				  $rates = $result->{'rates'}->$up_l / $result->{'rates'}->$up_m;
-				  $textReplyMessage = "$up_l Rate". "Today \n 1 $up_m is : " . $rates ." ". $up_l;
-			  }
+                			$up_m = strtoupper($mid);
+                			$up_l = strtoupper($last);
+                			$rate1 = $result->{'rates'}->$up_l;
+                			$rate2 = $result->{'rates'}->$up_m;
+
+			                if($rate1 == null || $rate2 == null){
+                				$textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
+                			}else{
+                			    $rates = $result->{'rates'}->$up_l / $result->{'rates'}->$up_m;
+                				$textReplyMessage = "$up_l Rate". "Today \n 1 $up_m is : " . $rates ." ". $up_l;
+                			}
                         }
 			    
                         $replyData = new TextMessageBuilder($textReplyMessage);
@@ -145,9 +146,9 @@ if(!is_null($events)){
 			$replyData2 = new TextMessageBuilder($textReplyMessage);
 			break;
 			}elseif($mid <> '' && $mid <> 'help' && $last <> ''){
-			$url = 'https://openexchangerates.org/api/latest.json?app_id=f23f7281781e426a9464af98371f1ae4';
-			$data = file_get_contents($url);
-			$result = json_decode($data);
+    			$url = 'https://openexchangerates.org/api/latest.json?app_id=f23f7281781e426a9464af98371f1ae4';
+    			$data = file_get_contents($url);
+    			$result = json_decode($data);
 
 			 if ($lastf == '') {
 			  $up_l = strtoupper($last);
@@ -208,9 +209,12 @@ if(!is_null($events)){
                          $replyData = new TextMessageBuilder($textReplyMessage);
                          break;
                       case "test":
-                         $textReplyMessage = "เบอร์ติดต่อ ทดสอบ : 089-xxx-test";
-                         $replyData = new TextMessageBuilder($textReplyMessage);
-                         break;
+                        $url = 'https://www.trswork.com/linebot/tel2.php?api=BB-BOT-XYZ';
+                        $data = file_get_contents($url);
+                        
+                        $textReplyMessage = $data;
+                        $replyData = new TextMessageBuilder($textReplyMessage);
+                        break;
                       case "pum":
                          $textReplyMessage = "เบอร์ติดต่อ ปุ้ม : 097-220-2000";
                          $replyData = new TextMessageBuilder($textReplyMessage);
