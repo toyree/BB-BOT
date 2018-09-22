@@ -261,12 +261,13 @@ if(!is_null($events)){
                                 $textReplyMessage = 'กรุณา กดปุ่มจากหน้าจอ Confirm ผ่านมือถือ เท่านั้น!';
                                 $replyData = new TextMessageBuilder($textReplyMessage);
                                 break;
-                        }else{
-                            $textReplyMessage = 'กรุณาพิมพ์ regis <ชื่อของคุณ> เพื่อลงทะเบียน';
-                            $replyData = new TextMessageBuilder($textReplyMessage);
-                            break;
                         }
+                    }else{
+                        $textReplyMessage = 'กรุณาพิมพ์ regis <ชื่อของคุณ> เพื่อลงทะเบียน';
+                        $replyData = new TextMessageBuilder($textReplyMessage);
+                        break;
                     }
+                
                 //For test new command
                 case "test":
                     switch ($mid) {
