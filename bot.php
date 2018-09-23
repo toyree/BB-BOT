@@ -224,7 +224,7 @@ if(!is_null($events)){
                          $textReplyMessage = "กรุณาพิมพ์ add <ชื่อข้อมูลที่ต้องการเพิ่ม>";
                          $replyData = new TextMessageBuilder($textReplyMessage);
 
-                         $textReplyMessage = "เช่น add tel 0891234567 ais \"n หรือ \"n add tel 0891234567 ";
+                         $textReplyMessage = "เช่น add tel 0891234567 ais \n หรือ \n add tel 0891234567 ";
                          $replyData2 = new TextMessageBuilder($textReplyMessage);
                          break;
 
