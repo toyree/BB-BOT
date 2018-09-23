@@ -220,7 +220,7 @@ if(!is_null($events)){
                 //ADD Data to database use command 'add'
                  case "add":
                     switch ($mid) {
-                      case "" || "help":
+                      case "":
                          $textReplyMessage = "กรุณาพิมพ์ add <ชื่อข้อมูลที่ต้องการเพิ่ม>";
                          $replyData = new TextMessageBuilder($textReplyMessage);
 
