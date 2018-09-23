@@ -197,11 +197,12 @@ if(!is_null($events)){
                     $replyData3 = new StickerMessageBuilder($packageID,$stickerID);
                     break;
                 }
+                break;
             //Add Calculate Price with exchange rate --END--
                 
                 case "tel":
                     switch ($mid) {
-                      case "" || "help":
+                      case "" || "help" || " ":
                          $textReplyMessage = "กรุณาพิมพ์ tel <ชื่อ> เพื่อสอบถามข้อมูลเบอร์โปรศัพท์";
                          $replyData = new TextMessageBuilder($textReplyMessage);
                          break;
