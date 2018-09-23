@@ -202,7 +202,7 @@ if(!is_null($events)){
                 
                 case "tel":
                     switch ($mid) {
-                      case "" || "help" || " ":
+                      case "" :
                          $textReplyMessage = "กรุณาพิมพ์ tel <ชื่อ> เพื่อสอบถามข้อมูลเบอร์โปรศัพท์";
                          $replyData = new TextMessageBuilder($textReplyMessage);
                          break;
