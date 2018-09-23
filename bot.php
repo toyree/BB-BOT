@@ -201,7 +201,7 @@ if(!is_null($events)){
                 
                 case "tel":
                     switch ($mid) {
-                      case "" or "help":
+                      case "" || "help":
                          $textReplyMessage = "กรุณาพิมพ์ tel <ชื่อ> เพื่อสอบถามข้อมูลเบอร์โปรศัพท์";
                          $replyData = new TextMessageBuilder($textReplyMessage);
                          break;
@@ -219,7 +219,7 @@ if(!is_null($events)){
                 //ADD Data to database use command 'add'
                  case "add":
                     switch ($mid) {
-                      case "" or "help":
+                      case "" || "help":
                          $textReplyMessage = "กรุณาพิมพ์ add <ชื่อข้อมูลที่ต้องการเพิ่ม>";
                          $replyData = new TextMessageBuilder($textReplyMessage);
 
