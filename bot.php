@@ -348,13 +348,15 @@ if(!is_null($events)){
                             break;
 
                         case "cancel":
-                            # code...
+                            $textReplyMessage = 'ยังไม่เปิดให้บริการ';
+                            $replyData = new TextMessageBuilder($textReplyMessage);
                             break;
                         
                         default:
                             # code...
                             break;
                     }
+                    break;
 
                 case "move":
                     switch ($mid) {
