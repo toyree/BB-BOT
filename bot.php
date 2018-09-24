@@ -270,10 +270,10 @@ if(!is_null($events)){
                             
                                 $replyData = new TemplateMessageBuilder('Confirm register with BB-BOT',
                                                 new ConfirmTemplateBuilder(
-                                                    'โปรดตรวจสอบเบอร์โทรศัพท์ ของคุณอีกครั้ง : \n เบอร์ : '.$last.' \n เครือข่าย : '.$lastf.,
+                                                    'โปรดตรวจสอบเบอร์โทรศัพท์ ของคุณอีกครั้ง : \n เบอร์ : '.$last.' \n เครือข่าย : '.$lastf.
                                                     array(
                                                         new MessageTemplateActionBuilder(
-                                                            'ยืนยัน',
+                                                            'ยืนยัน' ,
                                                             'add tel '.$last.' yes y'
                                                         ),
                                                         new MessageTemplateActionBuilder(
