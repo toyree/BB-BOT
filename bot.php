@@ -88,7 +88,7 @@ if(!is_null($events)){
                     break;
                 case "v":
                     $picThumbnail = 'https://immense-journey-74194.herokuapp.com/test01.jpg';
-                    $videoUrl = "https://immense-journey-74194.herokuapp.com/test01.mp4";                
+                    $videoUrl = 'https://immense-journey-74194.herokuapp.com/test01.mp4';                
                     $replyData = new VideoMessageBuilder($videoUrl,$picThumbnail);
                     break;
                 case "a":
@@ -105,11 +105,11 @@ if(!is_null($events)){
                         
                 //Add Rate By Toy -- START --               
                 case "rate":
-                    IF($mid == '' || $mid == 'help' ){
+                    IF( $mid == '' || $mid == 'help' ){
                         $textReplyMessage = 'การใช้คำสั่ง Rate ให้พิมพ์ตามรูปแบบนี้ \n rate-<currency คั้งต้น>-<currency ปลายทาง>';
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;
-                        }elseif($mid <> '' && $mid <> 'help'){
+                        }elseif( $mid <> '' && $mid <> 'help' ){
                             $url = 'https://openexchangerates.org/api/latest.json?app_id=f23f7281781e426a9464af98371f1ae4';
                             $data = file_get_contents($url);
                             $result = json_decode($data);
@@ -144,18 +144,18 @@ if(!is_null($events)){
         
                 //Add Calculate Price with exchange rate --START--
                 case "cal":
-                    IF($mid == '' || $mid == 'help' ){
+                    IF( $mid == '' || $mid == 'help' ){
                         $textReplyMessage = 'การใช้คำสั่ง Cal ให้พิมพ์ตามรูปแบบนี้     cal-<ราคาสินค้า>-<currency คั้งต้น>-<currency ปลายทาง>';
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         $textReplyMessage = 'หรือใช้คำสั่งในรูแปป  cal-<ราคาสินค้า>-<currency คั้งต้น> ระบบจะ default เป็น THB ให้เสมอ เช่น cal-100-jpy';
                         $replyData2 = new TextMessageBuilder($textReplyMessage);
                         break;
-                    }elseif($mid <> '' && $mid <> 'help' && $last <> ''){
+                    }elseif( $mid <> '' && $mid <> 'help' && $last <> '' ){
                         $url = 'https://openexchangerates.org/api/latest.json?app_id=f23f7281781e426a9464af98371f1ae4';
                         $data = file_get_contents($url);
                         $result = json_decode($data);
 
-                         if ($lastf == '') {
+                         if ( $lastf == '' ) {
                           $up_l = strtoupper($last);
                           $rate1 = $result->{'rates'}->$up_l;
                           if($rate1 == null){
