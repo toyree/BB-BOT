@@ -337,6 +337,24 @@ if(!is_null($events)){
                     
                     break;
 
+                case "member":
+                    switch ($mid) {
+                        case "":
+                            # code...
+                            break;
+
+                        case "help":
+                            # code...
+                            break;
+
+                        case "cancel":
+                            # code...
+                            break;
+                        
+                        default:
+                            # code...
+                            break;
+                    }
 
                 case "move":
                     switch ($mid) {
@@ -414,6 +432,20 @@ if(!is_null($events)){
                     );
                     break;
                     */
+                case "bt":
+                    $replyData = new TemplateMessageBuilder('Confirm button Template',
+                        new ButtonTemplateBuilder(
+                            'button 1',
+                            'button 2',
+                            'button 3',
+                            [
+                                new PostbackTemplateActionBuilder('postback label', 'post-back'),
+                                new MessageTemplateActionBuilder('message label', 'test message'),
+                                new UriTemplateActionBuilder('uri label', 'https://google.com'),
+                            ]
+                        )
+                    );
+                    break;
                 //default:
                     //$textReplyMessage = "คำสั่งไม่ถูกต้อง กรุณาพิมพ์ HELP เพื่อตรวจสอบคำสั่ง";
                     //$replyData = new TextMessageBuilder($textReplyMessage);         
