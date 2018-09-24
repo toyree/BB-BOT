@@ -236,22 +236,67 @@ if(!is_null($events)){
                             $textReplyMessage = "เช่น add tel 0891234567 ais เป็นต้น";
                             $replyData2 = new TextMessageBuilder($textReplyMessage);
                         }elseif ($last != '' && $lastf == '') {
+                            $replyData = new TemplateMessageBuilder('Confirm button Template',
+                                        new ButtonTemplateBuilder(
+                                            'เพิ่มหมายเลขโทรศัพท์',
+                                            'หมายเลขโทรศัพท์ '.$last.' ของคุณเครื่องข่ายอะไร?',
+                                            'https://image.ibb.co/cbvS99/logo_network.png',
+                                            [
+                                                new PostbackTemplateActionBuilder('AIS',  'add tel '.$last.' ais'),
+                                                new PostbackTemplateActionBuilder('DTAC', 'add tel '.$last.' dtac'),
+                                                new PostbackTemplateActionBuilder('TRUE', 'add tel '.$last.' true'),
+                                                new PostbackTemplateActionBuilder('TOT',  'add tel '.$last.' tot'),
+                                                new PostbackTemplateActionBuilder('CAT',  'add tel '.$last.' cat'),
+                                                //new MessageTemplateActionBuilder('TRUE', 'test message'),
+                                                //new UriTemplateActionBuilder('uri label', 'https://google.com'),
+                                            ]
+                                        )
+                                    );
+                            /*
                             $textReplyMessage = "กรุณาระบุ เครือข่าย ของท่าน";
                             $replyData = new TextMessageBuilder($textReplyMessage);
 
                             $textReplyMessage = "เช่น add tel ".$last." ais เป็นต้น";
                             $replyData2 = new TextMessageBuilder($textReplyMessage);
+                            */
                         }else{
                             //$url = 'https://www.trswork.com/linebot/tel2.php?api=BB-BOT-XYZ&name='.$mid;
                             //$data = file_get_contents($url);
                             //$textReplyMessage = $data;
-                            $textReplyMessage = "ระบบ ยังไม่เปิด บริการ เพิ่มหมายเลขโทรศัพท์";
-                            $replyData = new TextMessageBuilder($textReplyMessage);
+                            //$textReplyMessage = "ระบบ ยังไม่เปิด บริการ เพิ่มหมายเลขโทรศัพท์";
+                            //$replyData = new TextMessageBuilder($textReplyMessage);
+                            if ($confirm == '') {
+                                # code...
+                            
+                                $replyData = new TemplateMessageBuilder('Confirm register with BB-BOT',
+                                                new ConfirmTemplateBuilder(
+                                                    'โปรดตรวจสอบเบอร์โทรศัพท์ ของคุณอีกครั้ง : \n เบอร์ : '.$last.' \n เครือข่าย : '.$lastf.,
+                                                    array(
+                                                        new MessageTemplateActionBuilder(
+                                                            'ยืนยัน',
+                                                            'add tel '.$last.' yes y'
+                                                        ),
+                                                        new MessageTemplateActionBuilder(
+                                                            'ยกเลิก',
+                                                            'add tel '.$last.' yes n'
+                                                        )
+                                                    )
+                                                )
+                                            );
+                            }elseif ($confirm != '') {
+                                if ($confirm == 'y') {
+                                    $textReplyMessage = "ระบบ ยังไม่เปิด บริการ เพิ่มหมายเลขโทรศัพท์";
+                                    $replyData = new TextMessageBuilder($textReplyMessage);
+                                }else{
+                                    $textReplyMessage = "ระบบ ยกเลิกการเพิ่มหมายเลขโทรศัพท์ ให้ท่านเรียบร้อย";
+                                    $replyData = new TextMessageBuilder($textReplyMessage);
+                                }
+                                
+                            }
+                            break;
                         }
 
                          break;
-                    }
-                    break;
 
                 //Register Line Account to  BB-Bot System
                 case "regis":
@@ -273,14 +318,14 @@ if(!is_null($events)){
                             default:
                                 $replyData = new TemplateMessageBuilder('Confirm register with BB-BOT',
                                             new ConfirmTemplateBuilder(
-                                                'Confirm Register BB-BOT with name is : '.$mid,
+                                                'คุณต้องการลงทะเบียน ในระบบ BB-BOT ด้วยชื่อ : '.$mid,
                                                 array(
                                                     new MessageTemplateActionBuilder(
-                                                        'Yes',
-                                                        'regis '.$mid.' Yes'
+                                                        'ยืนยัน',
+                                                        'regis '.$mid.' yes'
                                                     ),
                                                     new MessageTemplateActionBuilder(
-                                                        'No',
+                                                        'ยกเลิก',
                                                         'regis cancel'
                                                     )
                                                 )
@@ -439,13 +484,17 @@ if(!is_null($events)){
                 case "bt":
                     $replyData = new TemplateMessageBuilder('Confirm button Template',
                         new ButtonTemplateBuilder(
-                            'button title',
-                            'button button',
-                            'https://www.w3schools.com/w3css/img_lights.jpg',
+                            'เพิ่มหมายเลขโทรศัพท์',
+                            'หมายเลขโทรศัพท์ '.$last.' ของคุณเครื่องข่ายอะไร?',
+                            'https://image.ibb.co/cbvS99/logo_network.png',
                             [
-                                new PostbackTemplateActionBuilder('postback label', 'post-back'),
-                                new MessageTemplateActionBuilder('message label', 'test message'),
-                                new UriTemplateActionBuilder('uri label', 'https://google.com'),
+                                new PostbackTemplateActionBuilder('AIS',  'add tel '.$last.' ais'),
+                                new PostbackTemplateActionBuilder('DTAC', 'add tel '.$last.' dtac'),
+                                new PostbackTemplateActionBuilder('TRUE', 'add tel '.$last.' true'),
+                                new PostbackTemplateActionBuilder('TOT',  'add tel '.$last.' tot'),
+                                new PostbackTemplateActionBuilder('CAT',  'add tel '.$last.' cat'),
+                                //new MessageTemplateActionBuilder('TRUE', 'test message'),
+                                //new UriTemplateActionBuilder('uri label', 'https://google.com'),
                             ]
                         )
                     );
