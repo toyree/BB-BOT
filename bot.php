@@ -106,7 +106,7 @@ if(!is_null($events)){
                 //Add Rate By Toy -- START --               
                 case "rate":
                     IF($mid == '' || $mid == 'help' ){
-                        $textReplyMessage = 'การใช้คำสั่ง Rate ให้พิมพ์ตามรูปแบบนี้     rate-<currency คั้งต้น>-<currency ปลายทาง>';
+                        $textReplyMessage = 'การใช้คำสั่ง Rate ให้พิมพ์ตามรูปแบบนี้ \n rate-<currency คั้งต้น>-<currency ปลายทาง>';
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         break;
                         }elseif($mid <> '' && $mid <> 'help'){
@@ -295,8 +295,9 @@ if(!is_null($events)){
                             }
                             break;
                         }
+                    }
 
-                         break;
+                    break;
 
                 //Register Line Account to  BB-Bot System
                 case "regis":
