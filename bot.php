@@ -406,6 +406,7 @@ if(!is_null($events)){
                     }
                     break;
 
+                /*
                 case "move":
                     switch ($mid) {
                      case "arm":
@@ -439,7 +440,7 @@ if(!is_null($events)){
                     }
                 break;
 
-                /*
+                
 
                 case "s":
                     $stickerID = 22;
@@ -486,14 +487,14 @@ if(!is_null($events)){
                     $replyData = new TemplateMessageBuilder('Confirm button Template',
                         new ButtonTemplateBuilder(
                             'เพิ่มหมายเลขโทรศัพท์',
-                            'หมายเลขโทรศัพท์ '.$last.' ของคุณเครื่องข่ายอะไร?',
+                            'หมายเลขโทรศัพท์ '.$mid.' ของคุณเครื่องข่ายอะไร?',
                             'https://image.ibb.co/cbvS99/logo_network.png',
                             [
                                 new PostbackTemplateActionBuilder('AIS',  'add tel '.$last.' ais'),
                                 new PostbackTemplateActionBuilder('DTAC', 'add tel '.$last.' dtac'),
                                 new PostbackTemplateActionBuilder('TRUE', 'add tel '.$last.' true'),
-                                new PostbackTemplateActionBuilder('TOT',  'add tel '.$last.' tot'),
-                                new PostbackTemplateActionBuilder('CAT',  'add tel '.$last.' cat'),
+                                //new PostbackTemplateActionBuilder('TOT',  'add tel '.$last.' tot'),
+                                //new PostbackTemplateActionBuilder('CAT',  'add tel '.$last.' cat'),
                                 //new MessageTemplateActionBuilder('TRUE', 'test message'),
                                 //new UriTemplateActionBuilder('uri label', 'https://google.com'),
                             ]
