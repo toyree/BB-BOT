@@ -432,14 +432,14 @@ if(!is_null($events)){
                                 )
                         )
                     );
-                    break;
+                    break; 
                     */
                 case "bt":
                     $replyData = new TemplateMessageBuilder('Confirm button Template',
                         new ButtonTemplateBuilder(
-                            'button 1',
-                            'button 2',
-                            'button 3',
+                            'button title',
+                            'button button',
+                            '',
                             [
                                 new PostbackTemplateActionBuilder('postback label', 'post-back'),
                                 new MessageTemplateActionBuilder('message label', 'test message'),
