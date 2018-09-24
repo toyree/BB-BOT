@@ -340,11 +340,13 @@ if(!is_null($events)){
                 case "member":
                     switch ($mid) {
                         case "":
-                            # code...
+                            $textReplyMessage = 'ยังไม่เปิดให้บริการครับ';
+                            $replyData = new TextMessageBuilder($textReplyMessage);
                             break;
 
                         case "help":
-                            # code...
+                            $textReplyMessage = 'ยังไม่เปิดให้บริการค่ะ';
+                            $replyData = new TextMessageBuilder($textReplyMessage);
                             break;
 
                         case "cancel":
@@ -439,7 +441,7 @@ if(!is_null($events)){
                         new ButtonTemplateBuilder(
                             'button title',
                             'button button',
-                            '',
+                            'https://www.w3schools.com/w3css/img_lights.jpg',
                             [
                                 new PostbackTemplateActionBuilder('postback label', 'post-back'),
                                 new MessageTemplateActionBuilder('message label', 'test message'),
