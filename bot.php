@@ -493,7 +493,7 @@ if(!is_null($events)){
                                 new PostbackTemplateActionBuilder('AIS',  'add tel '.$last.' ais'),
                                 new PostbackTemplateActionBuilder('DTAC', 'add tel '.$last.' dtac'),
                                 new PostbackTemplateActionBuilder('TRUE', 'add tel '.$last.' true'),
-                                new PostbackTemplateActionBuilder('TOT',  'cal 1 usd),
+                                new PostbackTemplateActionBuilder('TOT',  'cal 1 usd'),
                                 //new PostbackTemplateActionBuilder('CAT',  'cal 1 usd'),
                                 //new MessageTemplateActionBuilder('TRUE', 'test message'),
                                 //new UriTemplateActionBuilder('uri label', 'https://google.com'),
