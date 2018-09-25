@@ -242,11 +242,9 @@ if(!is_null($events)){
                                             'หมายเลขโทรศัพท์ '.$last.' ของคุณเครื่องข่ายอะไร?',
                                             'https://image.ibb.co/cbvS99/logo_network.png',
                                             [
-                                                new PostbackTemplateActionBuilder('AIS',  'add tel '.$last.' ais'),
-                                                new PostbackTemplateActionBuilder('DTAC', 'add tel '.$last.' dtac'),
-                                                new PostbackTemplateActionBuilder('TRUE', 'add tel '.$last.' true'),
-                                                new PostbackTemplateActionBuilder('TOT',  'add tel '.$last.' tot'),
-                                                new PostbackTemplateActionBuilder('CAT',  'add tel '.$last.' cat'),
+                                                new MessageTemplateActionBuilder('AIS',  'add tel '.$last.' ais'),
+                                                new MessageTemplateActionBuilder('DTAC', 'add tel '.$last.' dtac'),
+                                                new MessageTemplateActionBuilder('TRUE', 'add tel '.$last.' true'),
                                                 //new MessageTemplateActionBuilder('TRUE', 'test message'),
                                                 //new UriTemplateActionBuilder('uri label', 'https://google.com'),
                                             ]
@@ -490,10 +488,9 @@ if(!is_null($events)){
                             'หมายเลขโทรศัพท์ '.$mid.' ของคุณเครื่องข่ายอะไร?',
                             'https://image.ibb.co/cbvS99/logo_network.png',
                             [
-                                new PostbackTemplateActionBuilder('AIS',  'add tel '.$last.' ais'),
-                                new PostbackTemplateActionBuilder('DTAC', 'add tel '.$last.' dtac'),
-                                new PostbackTemplateActionBuilder('TRUE', 'add tel '.$last.' true'),
-                                new PostbackTemplateActionBuilder('TOT',  'cal 1 usd'),
+                                new MessageTemplateActionBuilder('AIS',  'add tel '.$last.' ais'),
+                                new MessageTemplateActionBuilder('DTAC', 'add tel '.$last.' dtac'),
+                                new MessageTemplateActionBuilder('TRUE', 'add tel '.$last.' true'),
                                 //new PostbackTemplateActionBuilder('CAT',  'cal 1 usd'),
                                 //new MessageTemplateActionBuilder('TRUE', 'test message'),
                                 //new UriTemplateActionBuilder('uri label', 'https://google.com'),
