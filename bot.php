@@ -236,6 +236,7 @@ if(!is_null($events)){
                             $textReplyMessage = "เช่น add tel 0891234567 ais เป็นต้น";
                             $replyData2 = new TextMessageBuilder($textReplyMessage);
                         }elseif ($last != '' && $lastf == '') {
+
                             $replyData = new TemplateMessageBuilder('Confirm button Template',
                                         new ButtonTemplateBuilder(
                                             'เพิ่มหมายเลขโทรศัพท์',
@@ -268,7 +269,7 @@ if(!is_null($events)){
                             
                                 $replyData = new TemplateMessageBuilder('Confirm register with BB-BOT',
                                                 new ConfirmTemplateBuilder(
-                                                    'โปรดตรวจสอบเบอร์โทรศัพท์ ของคุณอีกครั้ง : \n เบอร์ : '.$last.' \n เครือข่าย : '.$lastf.
+                                                    'โปรดตรวจสอบเบอร์โทรศัพท์ ของคุณอีกครั้ง : \n เบอร์ : '.$last.' \n เครือข่าย : '.$lastf,
                                                     array(
                                                         new MessageTemplateActionBuilder(
                                                             'ยืนยัน' ,
@@ -281,6 +282,7 @@ if(!is_null($events)){
                                                     )
                                                 )
                                             );
+
                             }elseif ($confirm != '') {
                                 if ($confirm == 'y') {
                                     $textReplyMessage = "ระบบ ยังไม่เปิด บริการ เพิ่มหมายเลขโทรศัพท์";
