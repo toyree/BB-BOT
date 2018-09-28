@@ -217,6 +217,29 @@ if(!is_null($events)){
                     }
                     break;
 
+                //This command for calculate ค่าเดินทาง ไป TOA เท่านั้น
+                case "toa":
+                    if ($mid == '' || $last = '' || $lastf == '' || $mid == 'help') {
+                        $textReplyMessage = "กรุณาพิมพ์ toa <จำนวนวัน> <จำนวนคำหาร> <ราคาน้ำมัน ณ ขณะนั้น>";
+                    }elseif($mid != '' && $last != '' && $lastf != '' ){
+                        $day = $mid;
+                        $person = $last;
+                        $oil = $lastf;
+
+                        $total_km = ((56 * $day)/8) * $oil ;
+                        $total_express = 20 * $day;
+                        $total_cost = $total_km + $total_express;
+                        $total_cost_per_person = $total_cost / $person;
+
+                        $textReplyMessage = "ค่าเดินทางทั้งหมด ราคา : " . $total_cost . " บาท /nราคาที่ต้องจ่ายต่อคน : ".$total_cost_per_person." บาท";
+
+                    }else{
+                        $textReplyMessage = "กรุณาพิมพ์ toa <จำนวนวัน> <จำนวนคำหาร> <ราคาน้ำมัน ณ ขณะนั้น>";
+                    }
+                    $replyData = new TextMessageBuilder($textReplyMessage);
+                    
+                    break;
+
                 //ADD Data to database use command 'add'
                  case "add":
                     switch ($mid) {
@@ -267,9 +290,9 @@ if(!is_null($events)){
                             if ($confirm == '') {
                                 # code...
                             
-                                $replyData = new TemplateMessageBuilder('Confirm register with BB-BOT',
+                                $replyData = new TemplateMessageBuilder('โปรดตรวจสอบเบอร์โทรศัพท์ ของคุณอีกครั้ง',
                                                 new ConfirmTemplateBuilder(
-                                                    'โปรดตรวจสอบเบอร์โทรศัพท์ ของคุณอีกครั้ง : \n เบอร์ : '.$last.' \n เครือข่าย : '.$lastf,
+                                                    'โปรดตรวจสอบเบอร์โทรศัพท์ ของคุณอีกครั้ง : เบอร์ : '.$last.' เครือข่าย : '.$lastf,
                                                     array(
                                                         new MessageTemplateActionBuilder(
                                                             'ยืนยัน' ,
