@@ -231,7 +231,7 @@ if(!is_null($events)){
                         $total_cost = $total_km + $total_express;
                         $total_cost_per_person = $total_cost / $person;
 
-                        $textReplyMessage = "ค่าเดินทางทั้งหมด ราคา : " . $total_cost . " บาท /nราคาที่ต้องจ่ายต่อคน : ".$total_cost_per_person." บาท";
+                        $textReplyMessage = "ค่าเดินทางทั้งหมด ราคา : " . $total_cost . " บาท \nราคาที่ต้องจ่ายต่อคน : ".$total_cost_per_person." บาท";
 
                     }else{
                         $textReplyMessage = "กรุณาพิมพ์ toa <จำนวนวัน> <จำนวนคำหาร> <ราคาน้ำมัน ณ ขณะนั้น>";
