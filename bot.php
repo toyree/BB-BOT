@@ -219,7 +219,7 @@ if(!is_null($events)){
 
                 //This command for calculate ค่าเดินทาง ไป TOA เท่านั้น
                 case "toa":
-                    if ($mid == '' || $last = '' || $lastf == '' || $mid == 'help') {
+                    if ($mid == '' || $mid == 'help') {
                         $textReplyMessage = "กรุณาพิมพ์ toa <จำนวนวัน> <จำนวนคำหาร> <ราคาน้ำมัน ณ ขณะนั้น>";
                     }elseif($mid != '' && $last != '' && $lastf != '' ){
                         $day = $mid;
