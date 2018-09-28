@@ -231,6 +231,9 @@ if(!is_null($events)){
                         $total_cost = $total_km + $total_express;
                         $total_cost_per_person = $total_cost / $person;
 
+                        $total_cost = number_format($total_cost, 2);
+                        $total_cost_per_person = number_format($total_cost_per_person, 2);
+
                         $textReplyMessage = "ค่าเดินทางทั้งหมด ราคา : " . $total_cost . " บาท \nราคาที่ต้องจ่ายต่อคน : ".$total_cost_per_person." บาท";
 
                     }else{
