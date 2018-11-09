@@ -87,8 +87,8 @@ if(!is_null($events)){
                     $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
                     break;
                 case "v":
-                    $picThumbnail = 'https://immense-journey-74194.herokuapp.com/test01.jpg';
-                    $videoUrl = 'https://immense-journey-74194.herokuapp.com/test01.mp4';                
+                    $picThumbnail = 'https://linebotdb.herokuapp.com/1m1j.jpg';
+                    $videoUrl = 'https://linebotdb.herokuapp.com/1m1j.mp4';                
                     $replyData = new VideoMessageBuilder($videoUrl,$picThumbnail);
                     break;
                 case "a":
