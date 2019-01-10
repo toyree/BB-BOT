@@ -148,7 +148,7 @@ if(!is_null($events)){
                         $replyData = new TemplateMessageBuilder('Confirm button Template',
                                         new ButtonTemplateBuilder(
                                             'ตรวจสอบสภาพอากาศ',
-                                            'หมายเลขโทรศัพท์ '.$last.' ของคุณเครื่องข่ายอะไร?',
+                                            'หมายเลขโทรศัพท์',
                                             'https://image.ibb.co/cbvS99/logo_network.png',
                                             [
                                                 new MessageTemplateActionBuilder('เขตบางนา',   'air 05t'),
@@ -160,6 +160,7 @@ if(!is_null($events)){
                                             ]
                                         )
                                     );
+
                         break;
                         }elseif( $mid <> '' && $mid <> 'help' ){
                 
@@ -212,35 +213,12 @@ if(!is_null($events)){
                             $textReplyMessage2  = "ค่า PM 2.5 : ".$air_pm25." ".$air_pm25m ." ".$air_pm25a." \n";
                             $textReplyMessage2 .= "ค่า PM 10  : ".$air_pm10." ".$air_pm10m ." ".$air_pm10a." \n";
                             $textReplyMessage2 .= "ค่า O3     : ".$air_o3." ".$air_o3m ." ".$air_o3a." \n";
-                        /*
-                        if ($last == '') {
-                            $up_m = strtoupper($mid);
-                            $rate1 = $result->{'LastUpdate'}->$up_m;
-                            if($rate1 == null){
-                                $textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
-                            }else{
-                                $textReplyMessage = $up_m." Rate". "Today \n 1 USD is : " . $result->{'rates'}->$up_m." ".$up_m;
-                            }
-                        }else{
-                            $up_m = strtoupper($mid);
-                            $up_l = strtoupper($last);
-                            $rate1 = $result->{'rates'}->$up_l;
-                            $rate2 = $result->{'rates'}->$up_m;
 
-                            if($rate1 == null || $rate2 == null){
-                                $textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
-                            }else{
-                                $rates = $result->{'rates'}->$up_l / $result->{'rates'}->$up_m;
-                                $textReplyMessage = "$up_l Rate". "Today \n 1 $up_m is : " . $rates ." ". $up_l;
-                            }
-                        }
-                        */
-                
+
                         $replyData = new TextMessageBuilder($textReplyMessage);
                         $replyData2 = new TextMessageBuilder($textReplyMessage2);
                         break;
-                        //}
-                
+                        }                
                 //Add Air By Toy -- END --
        
                 //Add Calculate Price with exchange rate --START--
