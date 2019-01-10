@@ -148,8 +148,8 @@ if(!is_null($events)){
                         $replyData = new TemplateMessageBuilder('Confirm button Template',
                                         new ButtonTemplateBuilder(
                                             'ตรวจสอบสภาพอากาศ',
-                                            'หมายเลขโทรศัพท์',
-                                            'https://image.ibb.co/cbvS99/logo_network.png',
+                                            'เลือกเขตที่ท่านต้องการตรวจสอบ',
+                                            'https://linebotdb.herokuapp.com/air4thai_logo.jpg',
                                             [
                                                 new MessageTemplateActionBuilder('เขตบางนา',   'air 05t'),
                                                 new MessageTemplateActionBuilder('อ.บางเสาธง',  'air 19t'),
