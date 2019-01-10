@@ -144,16 +144,32 @@ if(!is_null($events)){
 
                 //Add Air By Toy -- START --               
                 case "air":
-                /*
                     IF( $mid == '' || $mid == 'help' ){
-                        $textReplyMessage = 'การใช้คำสั่ง Rate ให้พิมพ์ตามรูปแบบนี้ \n rate-<currency คั้งต้น>-<currency ปลายทาง>';
-                        $replyData = new TextMessageBuilder($textReplyMessage);
+                        $replyData = new TemplateMessageBuilder('Confirm button Template',
+                                        new ButtonTemplateBuilder(
+                                            'ตรวจสอบสภาพอากาศ',
+                                            'หมายเลขโทรศัพท์ '.$last.' ของคุณเครื่องข่ายอะไร?',
+                                            'https://image.ibb.co/cbvS99/logo_network.png',
+                                            [
+                                                new MessageTemplateActionBuilder('เขตบางนา',   'air 05t'),
+                                                new MessageTemplateActionBuilder('อ.บางเสาธง',  'air 19t'),
+                                                new MessageTemplateActionBuilder('เขตดินแดง',  'air 11t'),
+                                                new MessageTemplateActionBuilder('เขตบางกระปิ', 'air 10t'),
+                                                //new MessageTemplateActionBuilder('TRUE', 'test message'),
+                                                //new UriTemplateActionBuilder('uri label', 'https://google.com'),
+                                            ]
+                                        )
+                                    );
                         break;
                         }elseif( $mid <> '' && $mid <> 'help' ){
-                */
-                            $url = 'http://air4thai.pcd.go.th/services/getNewAQI_JSON.php?stationID=05t';
+                
+                            $url = "http://air4thai.pcd.go.th/services/getNewAQI_JSON.php?stationID=".$mid;
                             $data = file_get_contents($url);
                             $result = json_decode($data);
+
+                            $air_pm25a = "(ไม่ควรเกิน 25)";
+                            $air_pm10a = "(ไม่ควรเกิน 120)";
+                            $air_o3a = "(ไม่ควรเกิน 70)";
 
                             $air_place = $result->areaTH;
                             $air_date  = $result->{'LastUpdate'}->date;
@@ -161,10 +177,41 @@ if(!is_null($events)){
                             $air_month = substr("2018-01-10",5 ,2);
                             $air_day   = substr("2018-01-10",8 ,2);
                             $air_time  = $result->{'LastUpdate'}->time;
+
+                            //PM 2.5
                             $air_pm25  = $result->{'LastUpdate'}->{'PM25'}->value;
                             $air_pm25m  = $result->{'LastUpdate'}->{'PM25'}->unit;
+                            if($air_pm25 == '-'){
+                                $air_pm25 = "ไม่พบข้อมูล";
+                                $air_pm25m = "";
+                                $air_pm25a = "";
+                            }
 
-                            $textReplyMessage = "สภาพอากาศ ". $air_place . " \n วันที่ : ".$air_day." เดือน ".$air_month." ปี ".$air_year." \n เวลา ".$air_time. " \n ค่า PM 2.5 : ".$air_pm25." ".$air_pm25m ." (ไม่ควรเกิน25)";
+                            //PM 10
+                            $air_pm10  = $result->{'LastUpdate'}->{'PM10'}->value;
+                            $air_pm10m  = $result->{'LastUpdate'}->{'PM10'}->unit;
+                            if($air_pm10 == '-'){
+                                $air_pm10 = "ไม่พบข้อมูล";
+                                $air_pm10m = "";
+                                $air_pm10a = "";
+                            }
+
+                            //O3
+                            $air_o3  = $result->{'LastUpdate'}->{'O3'}->value;
+                            $air_o3m  = $result->{'LastUpdate'}->{'O3'}->unit;
+                            if($air_o3 == '-'){
+                                $air_o3 = "ไม่พบข้อมูล";
+                                $air_o3m = "";
+                                $air_o3a = "";
+                            }
+
+                            $textReplyMessage  = "สภาพอากาศ ". $air_place . " \n";
+                            $textReplyMessage .= "วันที่ : ".$air_day." เดือน ".$air_month." ปี ".$air_year." \n";
+                            $textReplyMessage .= "เวลา ".$air_time;
+
+                            $textReplyMessage2  = "ค่า PM 2.5 : ".$air_pm25." ".$air_pm25m ." ".$air_pm25a." \n";
+                            $textReplyMessage2 .= "ค่า PM 10  : ".$air_pm10." ".$air_pm10m ." ".$air_pm10a." \n";
+                            $textReplyMessage2 .= "ค่า O3     : ".$air_o3." ".$air_o3m ." ".$air_o3a." \n";
                         /*
                         if ($last == '') {
                             $up_m = strtoupper($mid);
@@ -190,6 +237,7 @@ if(!is_null($events)){
                         */
                 
                         $replyData = new TextMessageBuilder($textReplyMessage);
+                        $replyData2 = new TextMessageBuilder($textReplyMessage2);
                         break;
                         //}
                 
