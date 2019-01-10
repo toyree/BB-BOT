@@ -155,10 +155,16 @@ if(!is_null($events)){
                             $data = file_get_contents($url);
                             $result = json_decode($data);
 
-                            $air_date = $result->{'LastUpdate'}->date;
-                            $air_time = $result->{'LastUpdate'}->time;
+                            $air_place = $result->areaTH;
+                            $air_date  = $result->{'LastUpdate'}->date;
+                            $air_year  = substr("2018-01-10",0 ,4);
+                            $air_month = substr("2018-01-10",5 ,2);
+                            $air_day   = substr("2018-01-10",8 ,2);
+                            $air_time  = $result->{'LastUpdate'}->time;
+                            $air_pm25  = $result->{'LastUpdate'}->{'PM25'}->value;
+                            $air_pm25m  = $result->{'LastUpdate'}->{'PM25'}->unit;
 
-                            $textReplyMessage = "สภาพอากาศ". " \n วันที่  1 USD is : " . $result->{'LastUpdate'}->date." \n เวลา ".$air_time;
+                            $textReplyMessage = "สภาพอากาศ ". $air_place . " \n วันที่ : ".$air_day." เดือน ".$air_month." ปี ".$air_year." \n เวลา ".$air_time. " \n ค่า PM 2.5 : ".$air_pm25." ".$air_pm25m;
                         /*
                         if ($last == '') {
                             $up_m = strtoupper($mid);
