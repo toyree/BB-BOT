@@ -143,7 +143,7 @@ if(!is_null($events)){
                 //Add Rate By Toy -- END --
 
                 //Add Air By Toy -- START --               
-                case "rate":
+                case "air":
                 /*
                     IF( $mid == '' || $mid == 'help' ){
                         $textReplyMessage = 'การใช้คำสั่ง Rate ให้พิมพ์ตามรูปแบบนี้ \n rate-<currency คั้งต้น>-<currency ปลายทาง>';
