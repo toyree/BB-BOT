@@ -141,7 +141,54 @@ if(!is_null($events)){
                         }
                 
                 //Add Rate By Toy -- END --
-        
+
+                //Add Air By Toy -- START --               
+                case "rate":
+                /*
+                    IF( $mid == '' || $mid == 'help' ){
+                        $textReplyMessage = 'การใช้คำสั่ง Rate ให้พิมพ์ตามรูปแบบนี้ \n rate-<currency คั้งต้น>-<currency ปลายทาง>';
+                        $replyData = new TextMessageBuilder($textReplyMessage);
+                        break;
+                        }elseif( $mid <> '' && $mid <> 'help' ){
+                */
+                            $url = 'http://air4thai.pcd.go.th/services/getNewAQI_JSON.php?stationID=05t';
+                            $data = file_get_contents($url);
+                            $result = json_decode($data);
+
+                            $air_date = $result->{'LastUpdate'}->date;
+                            $air_time = $result->{'LastUpdate'}->time;
+
+                            $textReplyMessage = "สภาพอากาศ". " \n วันที่  1 USD is : " . $result->{'LastUpdate'}->date." \n เวลา ".$air_time;
+                        /*
+                        if ($last == '') {
+                            $up_m = strtoupper($mid);
+                            $rate1 = $result->{'LastUpdate'}->$up_m;
+                            if($rate1 == null){
+                                $textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
+                            }else{
+                                $textReplyMessage = $up_m." Rate". "Today \n 1 USD is : " . $result->{'rates'}->$up_m." ".$up_m;
+                            }
+                        }else{
+                            $up_m = strtoupper($mid);
+                            $up_l = strtoupper($last);
+                            $rate1 = $result->{'rates'}->$up_l;
+                            $rate2 = $result->{'rates'}->$up_m;
+
+                            if($rate1 == null || $rate2 == null){
+                                $textReplyMessage = "คุณระบุ สกุลเงิน ไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง";
+                            }else{
+                                $rates = $result->{'rates'}->$up_l / $result->{'rates'}->$up_m;
+                                $textReplyMessage = "$up_l Rate". "Today \n 1 $up_m is : " . $rates ." ". $up_l;
+                            }
+                        }
+                        */
+                
+                        $replyData = new TextMessageBuilder($textReplyMessage);
+                        break;
+                        //}
+                
+                //Add Air By Toy -- END --
+       
                 //Add Calculate Price with exchange rate --START--
                 case "cal":
                     IF( $mid == '' || $mid == 'help' ){
