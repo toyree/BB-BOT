@@ -164,7 +164,7 @@ if(!is_null($events)){
                             $air_pm25  = $result->{'LastUpdate'}->{'PM25'}->value;
                             $air_pm25m  = $result->{'LastUpdate'}->{'PM25'}->unit;
 
-                            $textReplyMessage = "สภาพอากาศ ". $air_place . " \n วันที่ : ".$air_day." เดือน ".$air_month." ปี ".$air_year." \n เวลา ".$air_time. " \n ค่า PM 2.5 : ".$air_pm25." ".$air_pm25m;
+                            $textReplyMessage = "สภาพอากาศ ". $air_place . " \n วันที่ : ".$air_day." เดือน ".$air_month." ปี ".$air_year." \n เวลา ".$air_time. " \n ค่า PM 2.5 : ".$air_pm25." ".$air_pm25m " (ไม่ควรเกิน25)";
                         /*
                         if ($last == '') {
                             $up_m = strtoupper($mid);
