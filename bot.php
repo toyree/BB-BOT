@@ -174,9 +174,9 @@ if(!is_null($events)){
 
                             $air_place = $result->areaTH;
                             $air_date  = $result->{'LastUpdate'}->date;
-                            $air_year  = substr("2018-01-10",0 ,4);
-                            $air_month = substr("2018-01-10",5 ,2);
-                            $air_day   = substr("2018-01-10",8 ,2);
+                            $air_year  = substr($air_date,0 ,4);
+                            $air_month = substr($air_date,5 ,2);
+                            $air_day   = substr($air_date,8 ,2);
                             $air_time  = $result->{'LastUpdate'}->time;
 
                             //PM 2.5
