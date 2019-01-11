@@ -206,13 +206,40 @@ if(!is_null($events)){
                                 $air_o3a = "";
                             }
 
+                            //AQI
+                            $air_aqi_lv  = $result->{'LastUpdate'}->{'AQI'}->Level;
+                            $air_aqi  = $result->{'LastUpdate'}->{'AQI'}->aqi;
+                            switch ($air_aqi_lv) {
+                                case '1':
+                                    $air_aqi_text = "ดีมาก";
+                                    break;
+
+                                case '2':
+                                    $air_aqi_text = "ดี";
+                                    break;
+                                
+                                case '3':
+                                    $air_aqi_text = "ปานกลาง";
+                                    break;
+
+                                case '4':
+                                    $air_aqi_text = "เริ่มมีผลกระทบ ต่อสุขภาพ";
+                                    break;
+
+                                case '5':
+                                    $air_aqi_text = "มีผบกระทบ ต่อสุขภาพ";
+                                    break;
+                            }
+
                             $textReplyMessage  = "สภาพอากาศ ". $air_place . " \n";
                             $textReplyMessage .= "วันที่ : ".$air_day." เดือน ".$air_month." ปี ".$air_year." \n";
                             $textReplyMessage .= "เวลา ".$air_time;
 
                             $textReplyMessage2  = "ค่า PM 2.5 : ".$air_pm25." ".$air_pm25m ." ".$air_pm25a." \n";
                             $textReplyMessage2 .= "ค่า PM 10  : ".$air_pm10." ".$air_pm10m ." ".$air_pm10a." \n";
-                            $textReplyMessage2 .= "ค่า O3     : ".$air_o3." ".$air_o3m ." ".$air_o3a." \n";
+                            $textReplyMessage2 .= "ค่า O3      : ".$air_o3." ".$air_o3m ." ".$air_o3a." \n";
+                            $textReplyMessage2 .= "ค่า AQI     : ".$air_aqi." \n";
+                            $textReplyMessage2 .= "คุณภาพอากาศ : ".$air_aqi_text." \n";
 
 
                         $replyData = new TextMessageBuilder($textReplyMessage);
