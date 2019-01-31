@@ -80,8 +80,8 @@ if(!is_null($events)){
                 case "help":
                     $textReplyMessage = "คำสั่งเบื้องต้น  Rate=> เช็คอัตราแลกเปลี่ยน   Cal=>คำนวณเงินตามอัตราแลกเปลี่ยน   Tel=>ตรวจเบอร์     Move=>เช็คตำแหน่ง";
                     $replyData = new TextMessageBuilder($textReplyMessage);
-                    break;
-                case "i":
+                    break;test
+                                    case "i":
                     $picFullSize = 'https://immense-journey-74194.herokuapp.com/pic1.jpg';
                     $picThumbnail = 'https://immense-journey-74194.herokuapp.com/pict1.jpg';
                     $replyData = new ImageMessageBuilder($picFullSize,$picThumbnail);
