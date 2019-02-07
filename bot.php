@@ -102,7 +102,53 @@ if(!is_null($events)){
                     $longitude = 100.61141967773438;
                     $replyData = new LocationMessageBuilder($placeName, $placeAddress, $latitude ,$longitude);              
                     break;
-                        
+                //Add Hello | HI command By Toy 
+                //-- START --               
+                case "hi":
+                    $userId = md5($userId);
+                    $url = 'https://www.trswork.com/linebot/sayhi.php?api=BB-BOT-SAYHI&uid='.$userId;
+                    $data = file_get_contents($url);
+
+                    $textReplyMessage = $data;
+                    $replyData = new TextMessageBuilder($textReplyMessage);
+
+                    $sticker_pack = rand(1,2);
+                    //for command cal only
+                    if($sticker_pack == '1'){
+                        $sticker_id_rand = ['2','10','13','106','107','114','116','120','122','132','407','409','410','417','426','428']; 
+                    }else{
+                        $sticker_id_rand = ['22','28','45','140','144','156','157','158','167','172','176','177','512'];
+                    }
+                    $sticker_id = $sticker_id_rand[mt_rand(0, count($sticker_id_rand) - 1)];    
+                    $stickerID = $sticker_id;
+                    $packageID = $sticker_pack;
+                    $replyData2 = new StickerMessageBuilder($packageID,$stickerID);
+                    break;
+
+                case "hello":
+                    $userId = md5($userId);
+                    $url = 'https://www.trswork.com/linebot/sayhi.php?api=BB-BOT-SAYHI&uid='.$userId;
+                    $data = file_get_contents($url);
+
+                    $textReplyMessage = $data;
+                    $replyData = new TextMessageBuilder($textReplyMessage);
+
+                    $sticker_pack = rand(1,2);
+                    //for command cal only
+                    if($sticker_pack == '1'){
+                        $sticker_id_rand = ['2','10','13','106','107','114','116','120','122','132','407','409','410','417','426','428']; 
+                    }else{
+                        $sticker_id_rand = ['22','28','45','140','144','156','157','158','167','172','176','177','512'];
+                    }
+                    $sticker_id = $sticker_id_rand[mt_rand(0, count($sticker_id_rand) - 1)];    
+                    $stickerID = $sticker_id;
+                    $packageID = $sticker_pack;
+                    $replyData2 = new StickerMessageBuilder($packageID,$stickerID);
+                    break;
+                //-- END -- 
+                //END Add Hello | HI command By Toy 
+
+
                 //Add Rate By Toy -- START --               
                 case "rate":
                     IF( $mid == '' || $mid == 'help' ){
