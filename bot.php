@@ -574,10 +574,18 @@ if(!is_null($events)){
                             break;
 
                         case "cancel":
+                            $userId = md5($userId);
+                            $url = 'https://www.trswork.com/linebot/regis.php?api=BB-BOT-MEMBER-DESTROY&uid='.$userId;
+                            $data = file_get_contents($url);
+
+                            $textReplyMessage = $data;
+                            $replyData = new TextMessageBuilder($textReplyMessage);
+                            break;
+                            /*
                             $textReplyMessage = 'ยังไม่เปิดให้บริการ';
                             $replyData = new TextMessageBuilder($textReplyMessage);
                             break;
-                        
+                            */
                         default:
                             # code...
                             break;
