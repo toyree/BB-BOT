@@ -575,7 +575,7 @@ if(!is_null($events)){
 
                         case "cancel":
                             $userId = md5($userId);
-                            $url = 'https://www.trswork.com/linebot/regis.php?api=BB-BOT-MEMBER-DESTROY&uid='.$userId;
+                            $url = 'https://www.trswork.com/linebot/member.php?api=BB-BOT-MEMBER-DESTROY&uid='.$userId;
                             $data = file_get_contents($url);
 
                             $textReplyMessage = $data;
